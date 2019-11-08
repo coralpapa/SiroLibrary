@@ -27,4 +27,14 @@ public class BungeeMessage {
     public static void sendMessage(@NotNull CommandSender sendTo, @NotNull String msg) {
         sendTo.sendMessage(TextComponent.fromLegacyText(msg));
     }
+
+    /**
+     * {@link CommandSender} に色付きで {@code msg} を送る
+     *
+     * @param sendTo メッセージの受取人
+     * @param msg    送る文字列
+     */
+    public static void sendMessageWithColor(@NotNull CommandSender sendTo, @NotNull String msg) {
+        sendTo.sendMessage(TextComponent.fromLegacyText(setColor(msg)));
+    }
 }
