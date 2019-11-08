@@ -6,7 +6,7 @@
 
     <groupId>com.github.siroshun09</groupId>
     <artifactId>sirolibrary</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 
     <name>SiroLibrary</name>
     <url>https://github.com/SiroPlugins/SiroLibrary</url>
@@ -64,6 +64,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>17.0.0</version>
@@ -105,6 +110,19 @@
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
