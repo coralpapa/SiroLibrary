@@ -1,0 +1,4 @@
+name: SiroLibrary
+main: com.github.siroshun09.sirolibrary.SiroLibraryBukkit
+version: ${project.version}
+author: Siroshun09
