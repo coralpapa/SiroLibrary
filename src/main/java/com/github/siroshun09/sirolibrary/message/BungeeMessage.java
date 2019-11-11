@@ -3,7 +3,11 @@ package com.github.siroshun09.sirolibrary.message;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.apache.commons.lang3.Validate;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collection;
 
 public class BungeeMessage {
 
@@ -36,5 +40,29 @@ public class BungeeMessage {
      */
     public static void sendMessageWithColor(@NotNull CommandSender sendTo, @NotNull String msg) {
         sendTo.sendMessage(TextComponent.fromLegacyText(setColor(msg)));
+    }
+
+    @Contract("_, _, _ -> param3")
+    @NotNull
+    public static <T extends Collection<? super String>> T copyPartialMatches(@NotNull final String token, @NotNull final Iterable<String> originals, @NotNull final T collection) throws UnsupportedOperationException, IllegalArgumentException {
+        Validate.notNull(token, "Search token cannot be null");
+        Validate.notNull(collection, "Collection cannot be null");
+        Validate.notNull(originals, "Originals cannot be null");
+
+        for (String string : originals) {
+            if (startsWithIgnoreCase(string, token)) {
+                collection.add(string);
+            }
+        }
+
+        return collection;
+    }
+
+    private static boolean startsWithIgnoreCase(@NotNull final String string, @NotNull final String prefix) throws IllegalArgumentException, NullPointerException {
+        Validate.notNull(string, "Cannot check a null string for a match");
+        if (string.length() < prefix.length()) {
+            return false;
+        }
+        return string.regionMatches(true, 0, prefix, 0, prefix.length());
     }
 }
