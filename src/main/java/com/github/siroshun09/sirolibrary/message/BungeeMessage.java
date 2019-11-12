@@ -12,7 +12,7 @@ import java.util.Collection;
 public class BungeeMessage {
 
     /**
-     * {@code str} の & から始まるカラーコードを変換して返す。
+     * {@code str} で {@code &} から始まるカラーコードを変換して返す。
      *
      * @param str 変換する文字列
      * @return 変換後の文字列

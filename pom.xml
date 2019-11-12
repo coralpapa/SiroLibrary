@@ -34,9 +34,10 @@
     </distributionManagement>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.charset>UTF-8</project.charset>
         <java.version>10</java.version>
+        <project.build.sourceEncoding>${project.charset}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${project.charset}</project.reporting.outputEncoding>
     </properties>
 
     <repositories>
@@ -99,7 +100,7 @@
                 <configuration>
                     <target>${java.version}</target>
                     <source>${java.version}</source>
-                    <encoding>UTF-8</encoding>
+                    <encoding>${project.charset}</encoding>
                     <useIncrementalCompilation>false</useIncrementalCompilation>
                 </configuration>
             </plugin>
@@ -137,6 +138,36 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <author>true</author>
+                    <show>private</show>
+                    <encoding>${project.charset}</encoding>
+                    <charset>${project.charset}</charset>
+                    <docencoding>${project.charset}</docencoding>
+                    <destDir>docs</destDir>
+                    <notimestamp>true</notimestamp>
+                    <bottom>
+                        <![CDATA[<p class="legalCopy">Copyright &#169; 2019 <a href="https://github.com/Siroshun09">Siroshun09</a>. All rights reserved.</p>]]></bottom>
+                    <links>
+                        <link>https://docs.oracle.com/javase/jp/${project.version}/docs/api</link>
+                        <link>https://commons.apache.org/proper/commons-lang/javadocs/api-3.9/</link>
+                        <link>https://hub.spigotmc.org/javadocs/spigot/</link>
+                        <link>https://papermc.io/javadocs/waterfall/</link>
+                    </links>
+                </configuration>
             </plugin>
         </plugins>
     </build>
