@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"com.github.siroshun09.sirolibrary"},{"l":"com.github.siroshun09.sirolibrary.config"},{"l":"com.github.siroshun09.sirolibrary.message"},{"l":"すべてのパッケージ","url":"allpackages-index.html"}]
