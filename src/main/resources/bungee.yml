@@ -1,4 +1,5 @@
 name: SiroLibrary
 main: com.github.siroshun09.sirolibrary.SiroLibraryBungee
 version: ${project.version}
+api-version: "1.14"
 author: Siroshun09
