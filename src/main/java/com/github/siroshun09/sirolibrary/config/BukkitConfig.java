@@ -10,12 +10,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Bukkit の Yaml ファイルをロードしたり保存したりするクラス
+ * Bukkit で Yaml ファイルをロードしたり保存したりするクラス
  */
 public class BukkitConfig {
     private final Plugin plugin;
     private final Path filePath;
     private final boolean resource;
+
     private FileConfiguration config;
 
     /**
@@ -39,32 +40,40 @@ public class BukkitConfig {
         load();
     }
 
+    /**
+     * Yaml ファイルをロードする。ファイルが存在しない場合は作成される。
+     *
+     * @see BukkitConfig#create()
+     */
     private void load() {
         if (!Files.exists(filePath)) create();
-
         config = YamlConfiguration.loadConfiguration(filePath.toFile());
         plugin.getLogger().info(filePath.getFileName().toString() + " を読み込みました");
     }
 
+    /**
+     * Yaml ファイルを作成する。
+     * 要求元プラグインのリソースからのコピーが要求されているも、存在しない場合は {@link IllegalArgumentException} が発生する。
+     *
+     * @throws IllegalArgumentException {@link BukkitConfig#resource} が true で、プラグインリソースにファイルが存在しない場合
+     */
     private void create() {
-        if (resource && plugin.getResource(filePath.getFileName().toString()) != null) {
-            plugin.saveResource(filePath.getFileName().toString(), false);
-            plugin.getLogger().info(filePath.getFileName().toString() + " を作成しました");
-            return;
-        } else if (resource) {
-            plugin.getLogger().warning(filePath.getFileName().toString() + " は PL に含まれていません");
-            plugin.getLogger().warning("PL 製作者に問い合わせてください");
-            return;
+        if (resource) {
+            if (plugin.getResource(filePath.getFileName().toString()) != null) {
+                plugin.saveResource(filePath.getFileName().toString(), false);
+                plugin.getLogger().info("ファイルを作成しました: " + filePath);
+            } else {
+                throw new IllegalArgumentException("プラグインから " + filePath.getFileName().toString() + " を検出できません");
+            }
+        } else {
+            try {
+                Files.createFile(filePath);
+            } catch (IOException e) {
+                plugin.getLogger().severe("ファイルの作成に失敗しました: " + filePath);
+                e.printStackTrace();
+            }
+            plugin.getLogger().info("ファイルを作成しました: " + filePath);
         }
-
-        try {
-            Files.createFile(filePath);
-        } catch (IOException e) {
-            plugin.getLogger().warning("ファイルの作成に失敗しました: " + filePath);
-            e.printStackTrace();
-        }
-
-        plugin.getLogger().info("ファイルを作成しました: " + filePath);
     }
 
     /**
@@ -87,17 +96,10 @@ public class BukkitConfig {
     }
 
     /**
-     * インスタンスごと取得する。
-     *
-     * @return {@link BukkitConfig}
-     */
-    public BukkitConfig get() {
-        return this;
-    }
-
-    /**
      * メモリに乗っている設定値を Yaml ファイルに上書き保存する。
      * ファイルが存在しない場合、新しく作成される。
+     *
+     * @see BukkitConfig#create()
      */
     public void save() {
         if (config == null) return;
@@ -105,7 +107,7 @@ public class BukkitConfig {
         try {
             getConfig().save(filePath.toFile());
         } catch (IOException e) {
-            plugin.getLogger().warning("ファイルの保存に失敗しました: " + filePath);
+            plugin.getLogger().severe("ファイルの保存に失敗しました: " + filePath);
             e.printStackTrace();
         }
     }

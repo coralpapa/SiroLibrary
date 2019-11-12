@@ -4,19 +4,23 @@ import net.md_5.bungee.api.plugin.Plugin;
 import org.jetbrains.annotations.Contract;
 
 /**
- * Bungee のプラグインインスタンス。
- * Bungee での稼働でのみ使用される。
+ * BungeeCord でのプラグインインスタンス。
+ * BungeeCord 上での稼働のみ使用される。
  */
 public class SiroLibraryBungee extends Plugin {
 
     private static SiroLibraryBungee instance;
 
+    /**
+     * コンストラクタ。
+     * {@link Plugin#onLoad()} より前に呼び出さる。
+     */
     public SiroLibraryBungee() {
         instance = this;
     }
 
     /**
-     * Bungee 上のこのプラグインのインスタンスを取得する。
+     * BungeeCord 上のこのプラグインのインスタンスを取得する。
      *
      * @return SiroLibraryBungee のプラグインインスタンス
      */

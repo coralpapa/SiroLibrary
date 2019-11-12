@@ -43,7 +43,7 @@ public class BungeeMessage {
     }
 
     /**
-     * <br>このメソッドは {@link org.bukkit.util.StringUtil#copyPartialMatches(String, Iterable, Collection)} からのコピーである</br>
+     * <b>{@link org.bukkit.util.StringUtil#copyPartialMatches(String, Iterable, Collection)} からのコピー</b>
      * <p>
      * Copies all elements from the iterable collection of originals to the
      * collection provided.
@@ -78,7 +78,7 @@ public class BungeeMessage {
     }
 
     /**
-     * <br>このメソッドは {@link org.bukkit.util.StringUtil#startsWithIgnoreCase(String, String)} からのコピーである</br>
+     * <b>{@link org.bukkit.util.StringUtil#startsWithIgnoreCase(String, String)} からのコピー</b>
      * <p>
      * This method uses a region to check case-insensitive equality. This
      * means the internal array does not need to be copied like a

@@ -4,13 +4,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Contract;
 
 /**
- * Bukkit のプラグインインスタンス。
- * Bukkit での稼働でのみ使用される。
+ * Bukkit でのプラグインインスタンス。
+ * Bukkit 上での稼働のみ使用される。
  */
 public class SiroLibraryBukkit extends JavaPlugin {
 
     private static SiroLibraryBukkit instance;
 
+    /**
+     * コンストラクタ。
+     * {@link JavaPlugin#onLoad()} より前に呼び出される。
+     */
     public SiroLibraryBukkit() {
         instance = this;
     }

@@ -11,6 +11,9 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * BungeeCord で Yaml ファイルをロードしたり保存したりするクラス
+ */
 public class BungeeConfig {
     private final Plugin plugin;
     private final Path filePath;
@@ -38,6 +41,11 @@ public class BungeeConfig {
         load();
     }
 
+    /**
+     * Yaml ファイルをロードする。ファイルが存在しない場合は作成される。
+     *
+     * @see BungeeConfig#create()
+     */
     private void load() {
         if (!Files.exists(filePath)) create();
 
@@ -51,6 +59,12 @@ public class BungeeConfig {
         plugin.getLogger().info(filePath.getFileName().toString() + " を読み込みました");
     }
 
+    /**
+     * Yaml ファイルを作成する。
+     * 要求元プラグインのリソースからのコピーが要求されているも、存在しない場合は {@link IllegalArgumentException} が発生する。
+     *
+     * @throws IllegalArgumentException {@link BungeeConfig#resource} が true で、プラグインリソースにファイルが存在しない場合
+     */
     private void create() {
         if (resource) {
             InputStream in = plugin.getResourceAsStream(filePath.getFileName().toString());
@@ -106,17 +120,10 @@ public class BungeeConfig {
     }
 
     /**
-     * インスタンスごと取得する。
-     *
-     * @return {@link BungeeConfig}
-     */
-    public BungeeConfig get() {
-        return this;
-    }
-
-    /**
      * メモリに乗っている設定値を Yaml ファイルに上書き保存する。
      * ファイルが存在しない場合、新しく作成される。
+     *
+     * @see BungeeConfig#create()
      */
     public void save() {
         if (!Files.exists(filePath)) create();
