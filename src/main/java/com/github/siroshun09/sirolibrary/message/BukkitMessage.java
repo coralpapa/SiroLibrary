@@ -15,6 +15,7 @@ public class BukkitMessage {
      *
      * @param str 変換する文字列
      * @return 変換後の文字列
+     * @since 1.0.10
      */
     public static String setColor(String str) {
         return ChatColor.translateAlternateColorCodes('&', str);
@@ -25,6 +26,7 @@ public class BukkitMessage {
      *
      * @param sendTo メッセージの受取人
      * @param msg    送る文字列
+     * @since 1.0.10
      */
     public static void sendMessage(CommandSender sendTo, String msg) {
         sendTo.sendMessage(msg);
@@ -35,6 +37,7 @@ public class BukkitMessage {
      *
      * @param sendTo メッセージの受取人
      * @param msg    送る文字列
+     * @since 1.0.10
      */
     public static void sendMessageWithColor(CommandSender sendTo, String msg) {
         sendTo.sendMessage(setColor(msg));
@@ -44,6 +47,7 @@ public class BukkitMessage {
      * サーバーにログインしているプレイヤー全員に {@code msg} を送る。
      *
      * @param msg 送る文字列
+     * @since 1.0.10
      */
     public static void broadcast(String msg) {
         for (Player p : Bukkit.getOnlinePlayers()) {
@@ -55,6 +59,7 @@ public class BukkitMessage {
      * サーバーにログインしているプレイヤー全員に {@code msg} を色付きで送る。
      *
      * @param msg 送る文字列
+     * @since 1.0.10
      */
     public static void broadcastWithColor(String msg) {
         for (Player p : Bukkit.getOnlinePlayers()) {
