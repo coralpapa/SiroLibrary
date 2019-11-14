@@ -9,6 +9,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
+/**
+ * BungeeCord におけるメッセージ送信・タブ保管のメソッド集
+ */
 public class BungeeMessage {
 
     /**
