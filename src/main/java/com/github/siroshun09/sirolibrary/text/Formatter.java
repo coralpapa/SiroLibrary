@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * 文字列にして返すメソッド集。
+ *
+ * @since 1.0.13
  */
 public class Formatter {
 
