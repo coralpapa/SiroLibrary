@@ -27,6 +27,7 @@ public class Formatter {
     /**
      * 渡された {@link LocalDate} を {@link DateTimeFormatter#ISO_LOCAL_DATE} 形式にして返す。
      *
+     * @param date フォーマットする日付
      * @return {@link DateTimeFormatter#ISO_LOCAL_DATE} 形式の日付
      */
     @NotNull
@@ -47,6 +48,7 @@ public class Formatter {
     /**
      * 渡された {@link LocalTime} を {@link DateTimeFormatter#ISO_LOCAL_TIME} 形式にして返す。
      *
+     * @param time フォーマットする時刻
      * @return {@link DateTimeFormatter#ISO_LOCAL_TIME} 形式の時刻
      */
     @NotNull
@@ -67,6 +69,7 @@ public class Formatter {
     /**
      * 渡された {@link LocalDateTime} を {@link DateTimeFormatter#ISO_LOCAL_DATE_TIME} 形式にして返す。
      *
+     * @param dateTime フォーマットする日時
      * @return {@link DateTimeFormatter#ISO_LOCAL_DATE_TIME} 形式の日時
      */
     @NotNull
