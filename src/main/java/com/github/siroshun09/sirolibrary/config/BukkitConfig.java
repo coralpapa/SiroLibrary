@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Bukkit で Yaml ファイルをロードしたり保存したりするクラス
@@ -110,5 +112,73 @@ public class BukkitConfig {
             plugin.getLogger().severe("ファイルの保存に失敗しました: " + filePath);
             e.printStackTrace();
         }
+    }
+
+    /**
+     * {@code key} の設定値を {@code boolean}で取得する。
+     *
+     * @param key 設定キー
+     * @param def デフォルト値
+     * @return 設定値、取得できない場合デフォルト値
+     */
+    public boolean getBoolean(@NotNull String key, boolean def) {
+        return config.getBoolean(key, def);
+    }
+
+    /**
+     * {@code key} の設定値を {@code double}で取得する。
+     *
+     * @param key 設定キー
+     * @param def デフォルト値
+     * @return 設定値、取得できない場合デフォルト値
+     */
+    public double getDouble(@NotNull String key, double def) {
+        return config.getDouble(key, def);
+    }
+
+    /**
+     * {@code key} の設定値を {@code int}で取得する。
+     *
+     * @param key 設定キー
+     * @param def デフォルト値
+     * @return 設定値、取得できない場合デフォルト値
+     */
+    public int getInt(@NotNull String key, int def) {
+        return config.getInt(key, def);
+    }
+
+    /**
+     * {@code key} の設定値を {@code long}で取得する。
+     *
+     * @param key 設定キー
+     * @param def デフォルト値
+     * @return 設定値、取得できない場合デフォルト値
+     */
+    public long getLong(@NotNull String key, long def) {
+        return config.getLong(key, def);
+    }
+
+    /**
+     * {@code key} の設定値を文字列で取得する。
+     *
+     * @param key 設定キー
+     * @param def デフォルト値
+     * @return 設定値、それが {@code null} の場合デフォルト値
+     */
+    @NotNull
+    public String getString(@NotNull String key, @NotNull String def) {
+        String value = config.getString(key);
+        return Objects.requireNonNullElse(value, def);
+    }
+
+    /**
+     * {@code key} の設定値を文字列のリストで取得する。
+     *
+     * @param key 設定キー
+     * @return 設定値、なければ空のリスト
+     */
+    @NotNull
+    public List<String> getStringList(@NotNull String key) {
+        return config.getStringList(key);
     }
 }
