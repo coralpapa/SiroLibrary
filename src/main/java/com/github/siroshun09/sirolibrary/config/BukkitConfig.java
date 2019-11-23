@@ -167,8 +167,7 @@ public class BukkitConfig {
      */
     @NotNull
     public String getString(@NotNull String key, @NotNull String def) {
-        String value = config.getString(key);
-        return Objects.requireNonNullElse(value, def);
+        return Objects.requireNonNullElse(config.getString(key), def);
     }
 
     /**
