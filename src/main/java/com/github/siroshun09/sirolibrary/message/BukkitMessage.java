@@ -1,9 +1,12 @@
 package com.github.siroshun09.sirolibrary.message;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Bukkit におけるメッセージ送信のメソッド集
@@ -65,5 +68,16 @@ public class BukkitMessage {
         for (Player p : Bukkit.getOnlinePlayers()) {
             p.sendMessage(setColor(msg));
         }
+    }
+
+    /**
+     * {@link Player} のアクションバーにメッセージを表示する。
+     *
+     * @param sendTo 表示するプレイヤー
+     * @param msg    表示するメッセージ
+     * @since 1.0.17
+     */
+    public static void sendActionBar(@NotNull Player sendTo, String msg) {
+        sendTo.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(setColor(msg)));
     }
 }

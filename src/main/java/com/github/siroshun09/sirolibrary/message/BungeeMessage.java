@@ -1,8 +1,10 @@
 package com.github.siroshun09.sirolibrary.message;
 
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -43,6 +45,17 @@ public class BungeeMessage {
      */
     public static void sendMessageWithColor(@NotNull CommandSender sendTo, @NotNull String msg) {
         sendTo.sendMessage(TextComponent.fromLegacyText(setColor(msg)));
+    }
+
+    /**
+     * {@link ProxiedPlayer} のアクションバーにメッセージを表示する。
+     *
+     * @param sendTo 表示するプレイヤー
+     * @param msg    表示するメッセージ
+     * @since 1.0.17
+     */
+    public static void sendActionBar(@NotNull ProxiedPlayer sendTo, @NotNull String msg) {
+        sendTo.sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(msg));
     }
 
     /**
