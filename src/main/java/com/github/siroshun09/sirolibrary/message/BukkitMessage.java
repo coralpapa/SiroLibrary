@@ -20,7 +20,8 @@ public class BukkitMessage {
      * @return 変換後の文字列
      * @since 1.0.10
      */
-    public static String setColor(String str) {
+    @NotNull
+    public static String setColor(@NotNull String str) {
         return ChatColor.translateAlternateColorCodes('&', str);
     }
 
@@ -31,7 +32,7 @@ public class BukkitMessage {
      * @param msg    送る文字列
      * @since 1.0.10
      */
-    public static void sendMessage(CommandSender sendTo, String msg) {
+    public static void sendMessage(@NotNull CommandSender sendTo, @NotNull String msg) {
         sendTo.sendMessage(msg);
     }
 
@@ -42,7 +43,7 @@ public class BukkitMessage {
      * @param msg    送る文字列
      * @since 1.0.10
      */
-    public static void sendMessageWithColor(CommandSender sendTo, String msg) {
+    public static void sendMessageWithColor(@NotNull CommandSender sendTo, @NotNull String msg) {
         sendTo.sendMessage(setColor(msg));
     }
 
@@ -52,7 +53,7 @@ public class BukkitMessage {
      * @param msg 送る文字列
      * @since 1.0.10
      */
-    public static void broadcast(String msg) {
+    public static void broadcast(@NotNull String msg) {
         for (Player p : Bukkit.getOnlinePlayers()) {
             p.sendMessage(msg);
         }
@@ -64,7 +65,7 @@ public class BukkitMessage {
      * @param msg 送る文字列
      * @since 1.0.10
      */
-    public static void broadcastWithColor(String msg) {
+    public static void broadcastWithColor(@NotNull String msg) {
         for (Player p : Bukkit.getOnlinePlayers()) {
             p.sendMessage(setColor(msg));
         }
@@ -77,7 +78,7 @@ public class BukkitMessage {
      * @param msg    表示するメッセージ
      * @since 1.0.17
      */
-    public static void sendActionBar(@NotNull Player sendTo, String msg) {
+    public static void sendActionBar(@NotNull Player sendTo, @NotNull String msg) {
         sendTo.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(setColor(msg)));
     }
 }
