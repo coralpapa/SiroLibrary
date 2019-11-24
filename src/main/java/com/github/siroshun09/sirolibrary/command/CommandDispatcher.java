@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 
 /**
  * コマンドを実行するメソッド集。
+ * @since 1.0.11
  */
 public class CommandDispatcher {
 

@@ -120,6 +120,7 @@ public class BukkitConfig {
      * @param key 設定キー
      * @param def デフォルト値
      * @return 設定値、取得できない場合デフォルト値
+     * @since 1.0.15
      */
     public boolean getBoolean(@NotNull String key, boolean def) {
         return config.getBoolean(key, def);
@@ -131,6 +132,7 @@ public class BukkitConfig {
      * @param key 設定キー
      * @param def デフォルト値
      * @return 設定値、取得できない場合デフォルト値
+     * @since 1.0.15
      */
     public double getDouble(@NotNull String key, double def) {
         return config.getDouble(key, def);
@@ -153,6 +155,7 @@ public class BukkitConfig {
      * @param key 設定キー
      * @param def デフォルト値
      * @return 設定値、取得できない場合デフォルト値
+     * @since 1.0.15
      */
     public long getLong(@NotNull String key, long def) {
         return config.getLong(key, def);
@@ -164,6 +167,7 @@ public class BukkitConfig {
      * @param key 設定キー
      * @param def デフォルト値
      * @return 設定値、それが {@code null} の場合デフォルト値
+     * @since 1.0.15
      */
     @NotNull
     public String getString(@NotNull String key, @NotNull String def) {
@@ -175,6 +179,7 @@ public class BukkitConfig {
      *
      * @param key 設定キー
      * @return 設定値、なければ空のリスト
+     * @since 1.0.15
      */
     @NotNull
     public List<String> getStringList(@NotNull String key) {
