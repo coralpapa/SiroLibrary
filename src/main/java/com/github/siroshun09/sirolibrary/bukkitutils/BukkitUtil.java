@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
@@ -117,5 +118,16 @@ public class BukkitUtil<T> {
      */
     public static void setTabCompleter(@Nullable PluginCommand cmd, @NotNull TabCompleter completer) {
         Optional.ofNullable(cmd).ifPresent(c -> c.setTabCompleter(completer));
+    }
+
+    /**
+     * イベントリスナーを登録する。
+     *
+     * @param listener リスナー
+     * @param plugin   プラグイン
+     * @since 1.1.2
+     */
+    public static void registerEvents(@NotNull Listener listener, Plugin plugin) {
+        Bukkit.getPluginManager().registerEvents(listener, plugin);
     }
 }
