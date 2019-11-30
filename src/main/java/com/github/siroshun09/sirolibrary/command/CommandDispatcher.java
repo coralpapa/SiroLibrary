@@ -3,8 +3,11 @@ package com.github.siroshun09.sirolibrary.command;
 import net.md_5.bungee.api.ProxyServer;
 import org.bukkit.Bukkit;
 
+import java.util.List;
+
 /**
  * コマンドを実行するメソッド集。
+ *
  * @since 1.0.11
  */
 public class CommandDispatcher {
@@ -53,5 +56,34 @@ public class CommandDispatcher {
      */
     public static boolean asPlayer(net.md_5.bungee.api.CommandSender sender, String command) {
         return ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, command);
+    }
+
+    /**
+     * 複数のコマンドを Bukkit のコンソールで一気に実行する。
+     *
+     * @param commands 実行するコマンドリスト
+     * @since 1.0.19
+     */
+    public static void runCommands(List<String> commands) {
+        runCommands(commands, true);
+    }
+
+    /**
+     * 複数のコマンドをコンソールで一気に実行する。
+     *
+     * @param commands 実行するコマンドリスト
+     * @param isBukkit Bukkit 上かどうか
+     * @since 1.0.19
+     */
+    public static void runCommands(List<String> commands, boolean isBukkit) {
+        if (isBukkit) {
+            for (String cmd : commands) {
+                toBukkit(cmd);
+            }
+        } else {
+            for (String cmd : commands) {
+                toBungee(cmd);
+            }
+        }
     }
 }
