@@ -1,17 +1,60 @@
-package com.github.siroshun09.sirolibrary.item;
+package com.github.siroshun09.sirolibrary.bukkitutils;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 /**
- * アイテムの比較メソッド集。
+ * アイテム用のメソッド集
  *
- * @since 1.0.18
+ * @since 1.1.1
  */
-public class Comparer {
+public class ItemUtil {
+    private final static ItemStack AIR = new ItemStack(Material.AIR);
+    private static ItemStack FLAME = createFlame();
+
+    /**
+     * 空気としてのアイテムを取得する。
+     *
+     * @return 空気
+     */
+    @Contract(pure = true)
+    @NotNull
+    public static ItemStack getAir() {
+        return AIR;
+    }
+
+    /**
+     * メニューのフレームを取得する。
+     *
+     * @return フレーム
+     */
+    @Contract(pure = true)
+    @NotNull
+    public static ItemStack getFlame() {
+        return FLAME;
+    }
+
+    /**
+     * メニューのフレームを作成する。
+     *
+     * @return 作成したフレーム
+     */
+    @NotNull
+    private static ItemStack createFlame() {
+        ItemStack item = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        ItemMeta meta = item.getItemMeta();
+        if (meta != null) {
+            meta.setDisplayName(ChatColor.RED + "");
+            item.setItemMeta(meta);
+        }
+        return item;
+    }
 
     /**
      * アイテムの名前を比較する。
