@@ -1,6 +1,7 @@
 package com.github.siroshun09.sirolibrary.bukkitutils;
 
 import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Firework;
@@ -53,7 +54,7 @@ public class FireworkUtil {
      */
     @Contract(pure = true)
     public static Color getColor(@NotNull String color) {
-        switch (color) {
+        switch (color.toUpperCase()) {
             case "AQUA":
                 return Color.AQUA;
             case "BLACK":
@@ -88,6 +89,29 @@ public class FireworkUtil {
                 return Color.YELLOW;
             default:
                 return Color.WHITE;
+        }
+    }
+
+    /**
+     * 花火の形を文字列から {@link FireworkEffect.Type} に準じて取得する。
+     *
+     * @param type 形の名前
+     * @return 取得した形、できなければ {@link FireworkEffect.Type#BALL}
+     * @see FireworkEffect.Type
+     * @since 1.1.5
+     */
+    public FireworkEffect.Type getType(@NotNull String type) {
+        switch (type.toUpperCase()) {
+            case "BALL_LARGE":
+                return FireworkEffect.Type.BALL_LARGE;
+            case "BURST":
+                return FireworkEffect.Type.BURST;
+            case "CREEPER":
+                return FireworkEffect.Type.CREEPER;
+            case "STAR":
+                return FireworkEffect.Type.STAR;
+            default:
+                return FireworkEffect.Type.BALL;
         }
     }
 }
