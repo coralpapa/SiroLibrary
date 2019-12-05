@@ -98,9 +98,9 @@ public class FireworkUtil {
      * @param type 形の名前
      * @return 取得した形、できなければ {@link FireworkEffect.Type#BALL}
      * @see FireworkEffect.Type
-     * @since 1.1.5
+     * @since 1.1.6
      */
-    public FireworkEffect.Type getType(@NotNull String type) {
+    public static FireworkEffect.Type getType(@NotNull String type) {
         switch (type.toUpperCase()) {
             case "BALL_LARGE":
                 return FireworkEffect.Type.BALL_LARGE;
