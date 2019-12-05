@@ -19,7 +19,7 @@ import java.util.concurrent.Future;
  *
  * @since 1.1.1
  */
-public class BukkitUtil<T> {
+public class BukkitUtil {
 
     /**
      * 次のサーバーティックでタスクを実行する。
