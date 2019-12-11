@@ -5,8 +5,18 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * ボスバー用のメソッド集
+ */
 public class BossBarUtil {
 
+    /**
+     * ボスバーの表示タイプを文字列から取得する。
+     *
+     * @param style タイプ名
+     * @return 指定したタイプ、存在しなければ警告した上 {@link BarStyle#SOLID} を返す
+     * @since 1.1.7
+     */
     public static BarStyle getStyle(@NotNull String style) {
         switch (style.toUpperCase()) {
             case "SEGMENTED_6":
@@ -25,6 +35,13 @@ public class BossBarUtil {
         }
     }
 
+    /**
+     * ボスバーの色を文字列から取得する。
+     *
+     * @param color 色名
+     * @return 指定した色、存在しなければ警告した上 {@link BarColor#WHITE} を返す
+     * @since 1.1.7
+     */
     public static BarColor getColor(@NotNull String color) {
         switch (color.toUpperCase()) {
             case "BLUE":
