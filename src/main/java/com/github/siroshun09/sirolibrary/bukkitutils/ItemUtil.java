@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ItemUtil {
     private final static ItemStack AIR = new ItemStack(Material.AIR);
-    private static ItemStack FLAME = createFlame();
+    private static final ItemStack FLAME = createFlame();
 
     /**
      * 空気としてのアイテムを取得する。
