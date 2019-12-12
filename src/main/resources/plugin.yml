@@ -1,5 +1,5 @@
 name: SiroLibrary
 main: com.github.siroshun09.sirolibrary.SiroLibraryBukkit
 version: ${project.version}
-api-version: "1.14"
+api-version: "1.15"
 author: Siroshun09
