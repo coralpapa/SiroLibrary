@@ -1,12 +1,13 @@
 package com.github.siroshun09.sirolibrary.logging;
 
+import com.github.siroshun09.sirolibrary.text.Formatter;
 import com.github.siroshun09.sirolibrary.text.Padding;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
+import java.time.LocalDate;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,6 +21,16 @@ public class FileLogger {
             Executors.newSingleThreadExecutor(r -> new Thread(r, "SiroLibrary-FileLogger-Thread"));
     private final static String separator = System.getProperty("line.separator");
 
+    private final Path dir;
+    private Path filePath;
+    private LocalDate date;
+
+    public FileLogger(@NotNull Path dir) {
+        this.dir = dir;
+        date = LocalDate.now();
+        filePath = dir.resolve(Formatter.getDate(date) + ".log");
+    }
+
     /**
      * {@code file} にログを書き込む。
      *
@@ -28,14 +39,30 @@ public class FileLogger {
      * @since 1.0.12
      */
     public static void write(Path file, String log) {
-        executor.submit(() -> {
-            try {
-                checkFile(file);
-                Files.write(file, addDate(log).getBytes(), StandardOpenOption.APPEND);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        executor.submit(new WriteTask(file, log));
+    }
+
+    /**
+     * 日付を確認し、必要に応じてログファイルを更新する。
+     *
+     * @since 1.2.4
+     */
+    private void checkDate() {
+        if (!date.equals(LocalDate.now())) {
+            date = LocalDate.now();
+            filePath = dir.resolve(Formatter.getDate(date) + ".log");
+        }
+    }
+
+    /**
+     * ファイルにログを書き込む。
+     *
+     * @param log 書き込むログ
+     * @since 1.2.4
+     */
+    public void write(String log) {
+        checkDate();
+        executor.submit(new WriteTask(filePath, log));
     }
 
     /**
