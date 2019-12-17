@@ -13,15 +13,26 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 10
+    - name: Maven Cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+           ${{ runner.os }}-maven-
+    - name: Maven Install
+      run: mvn install
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Maven release
-      uses: qcastel/github-actions-maven-release@v1.0.3
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        # The git user name for commiting the release
-        git-release-bot-name: "Release-Bot"
-        # The git user email for commiting the release
-        git-release-bot-email: "siro.shun8@gmail.com"
-        gpg-enabled: "false"
-        maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip"
-        access-token: ${{ secrets.GITHUB_TOKEN }}
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Auto Release.
+        draft: true
+        prerelease: false
