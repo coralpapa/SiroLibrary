@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * 文字列にして返すメソッド集。
@@ -37,12 +38,14 @@ public class Formatter {
 
     /**
      * 現在の時刻を {@link DateTimeFormatter#ISO_LOCAL_TIME} 形式にして返す。
+     * <p>
+     * ミリ秒以下は切り捨てられる。
      *
      * @return {@link DateTimeFormatter#ISO_LOCAL_TIME} 形式の時刻
      */
     @NotNull
     public static String getTime() {
-        return getTime(LocalTime.now());
+        return getTime(LocalTime.now().truncatedTo(ChronoUnit.SECONDS));
     }
 
     /**
@@ -59,11 +62,13 @@ public class Formatter {
     /**
      * 現在の日時を {@link DateTimeFormatter#ISO_LOCAL_DATE_TIME} 形式にして返す。
      *
+     * ミリ秒以下は切り捨てられる。
+     *
      * @return {@link DateTimeFormatter#ISO_LOCAL_DATE_TIME} 形式の日時
      */
     @NotNull
     public static String getDateTime() {
-        return getDateTime(LocalDateTime.now());
+        return getDateTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
     }
 
     /**
