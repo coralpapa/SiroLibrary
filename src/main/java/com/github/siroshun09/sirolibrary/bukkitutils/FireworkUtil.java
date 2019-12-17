@@ -1,5 +1,6 @@
 package com.github.siroshun09.sirolibrary.bukkitutils;
 
+import com.github.siroshun09.sirolibrary.SiroLibraryBukkit;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
@@ -87,7 +88,10 @@ public class FireworkUtil {
                 return Color.TEAL;
             case "YELLOW":
                 return Color.YELLOW;
+            case "WHITE":
+                return Color.WHITE;
             default:
+                SiroLibraryBukkit.getInstance().getLogger().warning("Color に " + color + " は存在しません");
                 return Color.WHITE;
         }
     }
@@ -110,7 +114,10 @@ public class FireworkUtil {
                 return FireworkEffect.Type.CREEPER;
             case "STAR":
                 return FireworkEffect.Type.STAR;
+            case "BALL":
+                return FireworkEffect.Type.BALL;
             default:
+                SiroLibraryBukkit.getInstance().getLogger().warning("Firework Type に " + type + " は存在しません");
                 return FireworkEffect.Type.BALL;
         }
     }
