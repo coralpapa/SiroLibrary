@@ -19,8 +19,9 @@ jobs:
       uses: qcastel/github-actions-maven-release@v1.0.3
       with:
         # The git user name for commiting the release
-        git-release-bot-name: "SiroPlugins-Release-Bot"
+        git-release-bot-name: "Release-Bot"
         # The git user email for commiting the release
         git-release-bot-email: "siro.shun8@gmail.com"
-        # Github access token. https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
+        gpg-enabled: "false"
+        maven-args: "-Dmaven.javadoc.skip=true -DskipTests -DskipITs -Ddockerfile.skip -DdockerCompose.skip"
         access-token: ${{ secrets.GITHUB_TOKEN }}
