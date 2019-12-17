@@ -30,12 +30,12 @@ public class Padding {
     }
 
     /**
-     * 現在の時刻を ISO 8601 形式にし、26字で返す。26字に満たない場合、末尾に0が付け足す。
+     * 現在の時刻を ISO 8601 形式にし、29字で返す。29字に満たない場合、末尾に0を付け足す。
      *
      * @return パディングされた ISO 8601 形式の現在時刻
      */
     @NotNull
     public static String padDateTime() {
-        return StringUtils.rightPad(LocalDateTime.now().toString(), 26, '0');
+        return StringUtils.rightPad(LocalDateTime.now().toString(), 29, '0');
     }
 }
