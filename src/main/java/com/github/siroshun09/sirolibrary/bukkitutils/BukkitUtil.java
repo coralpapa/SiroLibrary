@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -129,5 +130,25 @@ public class BukkitUtil {
      */
     public static void registerEvents(@NotNull Listener listener, Plugin plugin) {
         Bukkit.getPluginManager().registerEvents(listener, plugin);
+    }
+
+    /**
+     * 登録済みのイベントリスナーをすべて解除する。
+     *
+     * @param plugin プラグイン
+     * @since 1.2.6
+     */
+    public static void unregisterEvents(@NotNull Plugin plugin) {
+        HandlerList.unregisterAll(plugin);
+    }
+
+    /**
+     * 登録済みのイベントリスナーをすべて解除する。
+     *
+     * @param listener リスナー
+     * @since 1.2.6
+     */
+    public static void unregisterEvents(@NotNull Listener listener) {
+        HandlerList.unregisterAll(listener);
     }
 }
