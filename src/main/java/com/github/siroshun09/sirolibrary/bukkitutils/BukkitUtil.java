@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -150,5 +151,15 @@ public class BukkitUtil {
      */
     public static void unregisterEvents(@NotNull Listener listener) {
         HandlerList.unregisterAll(listener);
+    }
+
+    /**
+     * イベントを発火する。
+     *
+     * @param event リスナー
+     * @since 1.2.7
+     */
+    public static void callEvent(@NotNull Event event) {
+        Bukkit.getPluginManager().callEvent(event);
     }
 }

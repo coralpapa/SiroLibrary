@@ -2,6 +2,7 @@ package com.github.siroshun09.sirolibrary.bungeeutils;
 
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.api.plugin.Event;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.scheduler.ScheduledTask;
@@ -101,5 +102,15 @@ public class BungeeUtil {
      */
     public static void unregisterListeners(Plugin plugin) {
         ProxyServer.getInstance().getPluginManager().unregisterListeners(plugin);
+    }
+
+    /**
+     * イベントを発火する。
+     *
+     * @param event リスナー
+     * @since 1.2.7
+     */
+    public static void callEvent(@NotNull Event event) {
+        ProxyServer.getInstance().getPluginManager().callEvent(event);
     }
 }
