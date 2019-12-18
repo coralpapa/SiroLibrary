@@ -33,7 +33,7 @@ jobs:
           args: ${GITHUB_REPOSITORY##*/}.zip
       - name: Send generated files to Discord (O)
         uses: sinshutu/upload-to-discord@master
-        if: github_ref##*/ == master
+        if: github_ref == refs/heads/master
         env:
           DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_O }}
         with:
