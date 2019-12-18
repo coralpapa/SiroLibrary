@@ -30,10 +30,10 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_S }}
         with:
-          args: SiroLibrary.zip
+          args: ${GITHUB_REPOSITORY##*/}.zip
       - name: Send generated files to Discord (O)
         uses: sinshutu/upload-to-discord@master
-        if: ${GITHUB_REF##*/} == master
+        if: github_ref##*/ == master
         env:
           DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_O }}
         with:
