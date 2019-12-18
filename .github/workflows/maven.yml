@@ -24,7 +24,7 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Compress generated file
         id: compress_generated_files
-        run: zip -r SiroLibrary-${{ steps.hello.outputs.time }} target
+        run: zip -r SiroLibrary-${{ steps.hello.outputs.time }} target/
       - name: Send generated files to Discord
         uses: sinshutu/upload-to-discord@master
         env:
