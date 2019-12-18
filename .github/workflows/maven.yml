@@ -31,6 +31,13 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_S }}
         with:
           args: SiroLibrary.zip
+      - name: Discord notification (O)
+        if: github.ref == 'refs/heads/master'
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_O }}
+        with:
+          args: ':new: SiroLibrary が更新されました!'
       - name: Send generated files to Discord (O)
         uses: sinshutu/upload-to-discord@master
         if: github.ref == 'refs/heads/master'
