@@ -10,10 +10,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 10
-      - uses: actions/hello-world-javascript-action@master
-        id: hello
-        with:
-          who-to-greet: 'Start to build with maven'
       - uses: actions/cache@v1
         with:
           path: ~/.m2/repository
@@ -21,7 +17,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir ~/.m2
+          echo "<settings><servers><server><id>github</id><username>Siroshun09</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
+          mvn -B package --file pom.xml
       - name: Compress generated file
         id: compress_generated_files
         run: zip -r SiroLibrary target/
@@ -37,7 +38,7 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_O }}
         with:
-          args: ':new: SiroLibrary が更新されました!'
+          args: ':new: SiroLibrary が更新されました'
       - name: Send generated files to Discord (O)
         uses: sinshutu/upload-to-discord@master
         if: github.ref == 'refs/heads/master'
