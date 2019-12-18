@@ -10,32 +10,35 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 10
-      - name: Maven Cache
-        uses: actions/cache@v1
+      - uses: actions/cache@v1
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
       - name: Build with Maven
-        run: mvn -B package --file pom.xml -Dversion=1.2.7
+        env:
+          VERSION: &version 1.2.7
+        run: mvn -B package --file pom.xml -Dversion=${VERSION}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.0.0
         env:
+          VERSION: *version
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: 1.2.7
-          release_name: Version 1.2.7
+          tag_name: ${VERSION}
+          release_name: Version ${VERSION}
           draft: false
           prerelease: false
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1.0.1
         env:
+          VERSION: *version
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: /home/runner/work/SiroLibrary/SiroLibrary/target/SiroLibrary-1.2.7.jar
-          asset_name: SiroLibrary-1.2.7.jar
+          asset_path: /home/runner/work/SiroLibrary/SiroLibrary/target/SiroLibrary-${VERSION}.jar
+          asset_name: SiroLibrary-${VERSION}.jar
           asset_content_type: application/java-archive
