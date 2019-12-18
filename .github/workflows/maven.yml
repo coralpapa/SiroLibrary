@@ -17,8 +17,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Maven Install
-        run: mvn install
       - name: Build with Maven
         run: mvn -B package --file pom.xml -Dversion=1.2.7
       - name: Create Release
