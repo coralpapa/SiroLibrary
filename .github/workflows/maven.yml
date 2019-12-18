@@ -24,17 +24,17 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Compress generated file
         id: compress_generated_files
-        run: zip -r ${GITHUB_REPOSITORY##*/} target/
+        run: zip -r SiroLibrary target/
       - name: Send generated files to Discord (S)
         uses: sinshutu/upload-to-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_S }}
         with:
-          args: ${GITHUB_REPOSITORY##*/}.zip
+          args: SiroLibrary.zip
       - name: Send generated files to Discord (O)
         uses: sinshutu/upload-to-discord@master
         if: github.ref == 'refs/heads/master'
         env:
           DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_O }}
         with:
-          args: ${GITHUB_REPOSITORY##*/}.zip
+          args: SiroLibrary.zip
