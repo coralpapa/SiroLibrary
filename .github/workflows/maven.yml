@@ -11,10 +11,10 @@ jobs:
         with:
           java-version: 10
       - uses: actions/hello-world-javascript-action@master
+        id: hello
         with:
           who-to-greet: 'Start to build with maven'
       - uses: actions/cache@v1
-        id: hello
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -24,8 +24,11 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Compress generated file
         id: compress_generated_files
-        run: zip -r SiroLibrary-${{ steps.hello.outputs.time }} $HOME/work/SiroLibrary/SiroLibrary/target
-      - name: test
-        run: pwd      
-      - name: Print file list
-        run: ls -a
+        run: zip -r SiroLibrary-${{ steps.hello.outputs.time }} target
+      - name: Send generated files to Discord
+        uses: sinshutu/upload-to-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_S }}
+        with:
+          args: SiroLibrary-${{ steps.hello.outputs.time }}.jar
+        
