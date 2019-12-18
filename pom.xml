@@ -6,7 +6,7 @@
 
     <groupId>com.github.siroshun09</groupId>
     <artifactId>sirolibrary</artifactId>
-    <version>1.2.7</version>
+    <version>1.2.8</version>
 
     <name>SiroLibrary</name>
     <url>https://github.com/SiroPlugins/SiroLibrary</url>
@@ -29,7 +29,7 @@
         <repository>
             <id>github</id>
             <name>GitHub SiroPlugins Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/SiroPlugins/SiroLibrary</url>
+            <url>https://maven.pkg.github.com/siroplugins/sirolibrary</url>
         </repository>
     </distributionManagement>
 
