@@ -20,7 +20,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdir ~/.m2
+          mkdir -p ~/.m2
           echo "<settings><servers><server><id>github</id><username>Siroshun09</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
           mvn -B package --file pom.xml
       - name: Compress generated file
@@ -38,7 +38,7 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.WEBHOOK_O }}
         with:
-          args: ':new: SiroLibrary が更新されました'
+          args: ':new: SiroLibrary が更新されました: https://github.com/SiroPlugins/SiroLibrary'
       - name: Send generated files to Discord (O)
         uses: sinshutu/upload-to-discord@master
         if: github.ref == 'refs/heads/master'
