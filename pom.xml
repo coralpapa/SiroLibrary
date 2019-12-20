@@ -6,11 +6,10 @@
 
     <groupId>com.github.siroshun09</groupId>
     <artifactId>sirolibrary</artifactId>
-    <version>1.2.8</version>
+    <version>1.2.9</version>
 
     <name>SiroLibrary</name>
     <url>https://github.com/SiroPlugins/SiroLibrary</url>
-    <packaging>jar</packaging>
 
     <licenses>
         <license>
@@ -55,7 +54,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.15-R0.1-SNAPSHOT</version>
+            <version>1.15.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -143,7 +142,7 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
-                        <phase>none</phase>
+                        <phase>deploy</phase>
                     </execution>
                 </executions>
                 <configuration>
