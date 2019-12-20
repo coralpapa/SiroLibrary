@@ -1,5 +1,6 @@
 package com.github.siroshun09.sirolibrary.text;
 
+import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
@@ -61,7 +62,7 @@ public class Formatter {
 
     /**
      * 現在の日時を {@link DateTimeFormatter#ISO_LOCAL_DATE_TIME} 形式にして返す。
-     *
+     * <p>
      * ミリ秒以下は切り捨てられる。
      *
      * @return {@link DateTimeFormatter#ISO_LOCAL_DATE_TIME} 形式の日時
@@ -80,5 +81,16 @@ public class Formatter {
     @NotNull
     public static String getDateTime(LocalDateTime dateTime) {
         return DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(dateTime);
+    }
+
+    /**
+     * 渡された {@link Location} を {@code x, y, z} にして返す。
+     *
+     * @param l フォーマットするロケーション
+     * @return {@code x, y, z}
+     */
+    @NotNull
+    public static String getLocation(@NotNull Location l) {
+        return l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ();
     }
 }
