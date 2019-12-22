@@ -69,6 +69,16 @@
             <version>3.9</version>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.1-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq</artifactId>
+            <version>3.12.3</version>
+        </dependency>
+        <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>18.0.0</version>
@@ -139,6 +149,14 @@
                                     <pattern>org.apache.commons</pattern>
                                     <shadedPattern>com.github.siroshun09.dependencies.apache.commons</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>com.google.guava</pattern>
+                                    <shadedPattern>com.github.siroshun09.dependencies.google.guava</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.jooq</pattern>
+                                    <shadedPattern>com.github.siroshun09.dependencies.jooq</shadedPattern>
+                                </relocation>
                             </relocations>
                         </configuration>
                     </execution>
@@ -175,6 +193,8 @@
                     <links>
                         <link>https://docs.oracle.com/javase/jp/10/docs/api</link>
                         <link>https://commons.apache.org/proper/commons-lang/javadocs/api-3.9/</link>
+                        <link>https://javadoc.scijava.org/Guava/</link>
+                        <link>https://www.jooq.org/javadoc/latest/org.jooq/</link>
                         <link>https://hub.spigotmc.org/javadocs/spigot/</link>
                         <link>https://papermc.io/javadocs/waterfall/</link>
                         <link>https://javadoc.io/doc/org.jetbrains/annotations/18.0.0/</link>
