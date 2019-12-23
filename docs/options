@@ -1,0 +1,35 @@
+-classpath
+'C:/Users/Shunsuke/.m2/repository/org/spigotmc/spigot-api/1.15.1-R0.1-SNAPSHOT/spigot-api-1.15.1-R0.1-SNAPSHOT.jar;C:/Users/Shunsuke/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar;C:/Users/Shunsuke/.m2/repository/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar;C:/Users/Shunsuke/.m2/repository/net/md-5/bungeecord-chat/1.13-SNAPSHOT/bungeecord-chat-1.13-SNAPSHOT.jar;C:/Users/Shunsuke/.m2/repository/org/yaml/snakeyaml/1.25/snakeyaml-1.25.jar;C:/Users/Shunsuke/.m2/repository/net/md-5/bungeecord-api/1.15-SNAPSHOT/bungeecord-api-1.15-SNAPSHOT.jar;C:/Users/Shunsuke/.m2/repository/net/md-5/bungeecord-config/1.15-SNAPSHOT/bungeecord-config-1.15-SNAPSHOT.jar;C:/Users/Shunsuke/.m2/repository/net/md-5/bungeecord-event/1.15-SNAPSHOT/bungeecord-event-1.15-SNAPSHOT.jar;C:/Users/Shunsuke/.m2/repository/net/md-5/bungeecord-protocol/1.15-SNAPSHOT/bungeecord-protocol-1.15-SNAPSHOT.jar;C:/Users/Shunsuke/.m2/repository/net/md-5/brigadier/1.0.16-SNAPSHOT/brigadier-1.0.16-SNAPSHOT.jar;C:/Users/Shunsuke/.m2/repository/io/netty/netty-codec/4.1.44.Final/netty-codec-4.1.44.Final.jar;C:/Users/Shunsuke/.m2/repository/io/netty/netty-common/4.1.44.Final/netty-common-4.1.44.Final.jar;C:/Users/Shunsuke/.m2/repository/io/netty/netty-buffer/4.1.44.Final/netty-buffer-4.1.44.Final.jar;C:/Users/Shunsuke/.m2/repository/io/netty/netty-transport/4.1.44.Final/netty-transport-4.1.44.Final.jar;C:/Users/Shunsuke/.m2/repository/io/netty/netty-resolver/4.1.44.Final/netty-resolver-4.1.44.Final.jar;C:/Users/Shunsuke/.m2/repository/net/sf/trove4j/core/3.1.0/core-3.1.0.jar;C:/Users/Shunsuke/.m2/repository/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.jar;C:/Users/Shunsuke/.m2/repository/com/google/guava/guava/28.1-jre/guava-28.1-jre.jar;C:/Users/Shunsuke/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar;C:/Users/Shunsuke/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar;C:/Users/Shunsuke/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar;C:/Users/Shunsuke/.m2/repository/org/checkerframework/checker-qual/2.8.1/checker-qual-2.8.1.jar;C:/Users/Shunsuke/.m2/repository/com/google/errorprone/error_prone_annotations/2.3.2/error_prone_annotations-2.3.2.jar;C:/Users/Shunsuke/.m2/repository/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar;C:/Users/Shunsuke/.m2/repository/org/codehaus/mojo/animal-sniffer-annotations/1.18/animal-sniffer-annotations-1.18.jar;C:/Users/Shunsuke/.m2/repository/org/jetbrains/annotations/18.0.0/annotations-18.0.0.jar'
+-encoding
+'UTF-8'
+-private
+-sourcepath
+'S:/Programs/MCPlugins/SiroLibrary/src/main/java;S:/Programs/MCPlugins/SiroLibrary/target/generated-sources/annotations'
+-author
+-bottom
+'<p class="legalCopy">Copyright &#169; 2019 <a href="https://github.com/Siroshun09">Siroshun09</a>. All rights reserved.</p>'
+-charset
+'UTF-8'
+-d
+'S:/Programs/MCPlugins/SiroLibrary/docs'
+-docencoding
+'UTF-8'
+-doctitle
+'SiroLibrary 1.4.2 API'
+-link
+'https://docs.oracle.com/javase/jp/10/docs/api'
+-link
+'https://commons.apache.org/proper/commons-lang/javadocs/api-3.9'
+-link
+'https://hub.spigotmc.org/javadocs/spigot'
+-link
+'https://papermc.io/javadocs/waterfall'
+-link
+'https://javadoc.io/doc/org.jetbrains/annotations/18.0.0'
+-linkoffline
+'https://docs.oracle.com/javase/10/docs/api' 'S:/Programs/MCPlugins/SiroLibrary/target/javadoc-bundle-options'
+-notimestamp
+-use
+-version
+-windowtitle
+'SiroLibrary 1.4.2 API'
