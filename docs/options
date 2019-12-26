@@ -15,11 +15,13 @@
 -docencoding
 'UTF-8'
 -doctitle
-'SiroLibrary 1.4.2 API'
+'SiroLibrary 1.4.3 API'
 -link
 'https://docs.oracle.com/javase/jp/10/docs/api'
 -link
 'https://commons.apache.org/proper/commons-lang/javadocs/api-3.9'
+-link
+'https://javadoc.scijava.org/Guava'
 -link
 'https://hub.spigotmc.org/javadocs/spigot'
 -link
@@ -32,4 +34,4 @@
 -use
 -version
 -windowtitle
-'SiroLibrary 1.4.2 API'
+'SiroLibrary 1.4.3 API'
