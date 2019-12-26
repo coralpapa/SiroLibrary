@@ -8,6 +8,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Bukkit におけるメッセージ送信のメソッド集
  */
@@ -23,6 +26,22 @@ public class BukkitMessage {
     @NotNull
     public static String setColor(@NotNull String str) {
         return ChatColor.translateAlternateColorCodes('&', str);
+    }
+
+    /**
+     * {@code list} を色付けして新しいリストとして返す。
+     *
+     * @param list 色付けするリスト
+     * @return 色付け後のリスト
+     * @since 1.4.3
+     */
+    @NotNull
+    public static List<String> setColorList(@NotNull List<String> list) {
+        List<String> result = new ArrayList<>();
+        for (String s : list) {
+            result.add(setColor(s));
+        }
+        return result;
     }
 
     /**
