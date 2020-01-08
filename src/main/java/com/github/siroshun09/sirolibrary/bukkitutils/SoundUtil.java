@@ -20,7 +20,7 @@ public class SoundUtil {
      * @param player 再生されるプレイヤー
      * @param sound  再生する音
      */
-    public static void playSound(@NotNull Player player, Sound sound) {
+    public static void playSound(@NotNull Player player, @NotNull Sound sound) {
         player.playSound(player.getLocation(), sound, SoundCategory.MASTER, 100f, 1.0f);
     }
 
@@ -31,7 +31,7 @@ public class SoundUtil {
      * @param sound  再生する音
      * @param pitch  ピッチ
      */
-    public static void playSound(@NotNull Player player, Sound sound, float pitch) {
+    public static void playSound(@NotNull Player player, @NotNull Sound sound, float pitch) {
         player.playSound(player.getLocation(), sound, SoundCategory.MASTER, 100f, pitch);
     }
 
@@ -42,7 +42,7 @@ public class SoundUtil {
      * @param location 再生される位置
      * @param sound    再生する音
      */
-    public static void playSound(@NotNull World world, Location location, Sound sound) {
+    public static void playSound(@NotNull World world, @NotNull Location location, @NotNull Sound sound) {
         world.playSound(location, sound, SoundCategory.MASTER, 100f, 1.0f);
     }
 
@@ -54,7 +54,7 @@ public class SoundUtil {
      * @param sound    再生する音
      * @param pitch    ピッチ
      */
-    public static void playSound(@NotNull World world, Location location, Sound sound, float pitch) {
+    public static void playSound(@NotNull World world, @NotNull Location location, @NotNull Sound sound, float pitch) {
         world.playSound(location, sound, SoundCategory.MASTER, 100f, pitch);
     }
 }

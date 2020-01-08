@@ -28,7 +28,7 @@ public class BungeeUtil {
      * @see net.md_5.bungee.api.scheduler.TaskScheduler#schedule(Plugin, Runnable, long, TimeUnit)
      */
     @NotNull
-    public static ScheduledTask runLater(Plugin plugin, Runnable task, long delay, TimeUnit unit) {
+    public static ScheduledTask runLater(@NotNull Plugin plugin, @NotNull Runnable task, long delay, @NotNull TimeUnit unit) {
         return ProxyServer.getInstance().getScheduler().schedule(plugin, task, delay, unit);
     }
 
@@ -44,7 +44,7 @@ public class BungeeUtil {
      * @see net.md_5.bungee.api.scheduler.TaskScheduler#schedule(Plugin, Runnable, long, long, TimeUnit)
      */
     @NotNull
-    public static ScheduledTask runTimer(Plugin plugin, Runnable task, long delay, long period, TimeUnit unit) {
+    public static ScheduledTask runTimer(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period, @NotNull TimeUnit unit) {
         return ProxyServer.getInstance().getScheduler().schedule(plugin, task, delay, period, unit);
     }
 
@@ -82,7 +82,7 @@ public class BungeeUtil {
      * @param plugin   プラグイン
      * @param listener 登録するリスナー
      */
-    public static void registerListener(@NotNull Plugin plugin, Listener listener) {
+    public static void registerListener(@NotNull Plugin plugin, @NotNull Listener listener) {
         ProxyServer.getInstance().getPluginManager().registerListener(plugin, listener);
     }
 
@@ -91,7 +91,7 @@ public class BungeeUtil {
      *
      * @param listener 解除するリスナー
      */
-    public static void unregisterListener(Listener listener) {
+    public static void unregisterListener(@NotNull Listener listener) {
         ProxyServer.getInstance().getPluginManager().unregisterListener(listener);
     }
 
@@ -100,7 +100,7 @@ public class BungeeUtil {
      *
      * @param plugin プラグイン
      */
-    public static void unregisterListeners(Plugin plugin) {
+    public static void unregisterListeners(@NotNull Plugin plugin) {
         ProxyServer.getInstance().getPluginManager().unregisterListeners(plugin);
     }
 

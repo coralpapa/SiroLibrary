@@ -1,5 +1,6 @@
 package com.github.siroshun09.sirolibrary.logging;
 
+import com.github.siroshun09.sirolibrary.SiroExecutors;
 import com.github.siroshun09.sirolibrary.text.Formatter;
 import com.github.siroshun09.sirolibrary.text.Padding;
 import org.jetbrains.annotations.NotNull;
@@ -9,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * ファイルへのログ保存を非同期で行うクラス。
@@ -17,8 +17,7 @@ import java.util.concurrent.Executors;
  * @since 1.0.12
  */
 public class FileLogger {
-    private final static ExecutorService executor =
-            Executors.newSingleThreadExecutor(r -> new Thread(r, "SiroLibrary-FileLogger-Thread"));
+    private final static ExecutorService executor = SiroExecutors.newSingleExecutor("SiroLibrary-FileLogger-Thread");
     private final static String separator = System.getProperty("line.separator");
 
     private final Path dir;
@@ -38,7 +37,7 @@ public class FileLogger {
      * @param log  書き込むログ
      * @since 1.0.12
      */
-    public static void write(Path file, String log) {
+    public static void write(@NotNull Path file, @NotNull String log) {
         executor.submit(new WriteTask(file, log));
     }
 
@@ -55,17 +54,6 @@ public class FileLogger {
     }
 
     /**
-     * ファイルにログを書き込む。
-     *
-     * @param log 書き込むログ
-     * @since 1.2.4
-     */
-    public void write(String log) {
-        checkDate();
-        executor.submit(new WriteTask(filePath, log));
-    }
-
-    /**
      * 渡された文字列の最初に日時を、最後に改行を追加する。
      *
      * @param log ログ
@@ -74,7 +62,7 @@ public class FileLogger {
      * @since 1.0.12
      */
     @NotNull
-    public static String addDate(String log) {
+    public static String addDate(@NotNull String log) {
         return "[" + Padding.padDateTime() + "] " + log + separator;
     }
 
@@ -85,10 +73,21 @@ public class FileLogger {
      * @throws IOException 入出力エラー
      * @since 1.0.12
      */
-    public static void checkFile(Path file) throws IOException {
+    public static void checkFile(@NotNull Path file) throws IOException {
         if (!Files.exists(file)) {
             Files.createDirectories(file.getParent());
             Files.createFile(file);
         }
+    }
+
+    /**
+     * ファイルにログを書き込む。
+     *
+     * @param log 書き込むログ
+     * @since 1.2.4
+     */
+    public void write(@NotNull String log) {
+        checkDate();
+        executor.submit(new WriteTask(filePath, log));
     }
 }

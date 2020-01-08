@@ -7,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -53,7 +52,7 @@ public class FireworkUtil {
      * @return 取得した色、できなければ {@link Color#WHITE}
      * @see Color
      */
-    @Contract(pure = true)
+    @NotNull
     public static Color getColor(@NotNull String color) {
         switch (color.toUpperCase()) {
             case "AQUA":
@@ -104,6 +103,7 @@ public class FireworkUtil {
      * @see FireworkEffect.Type
      * @since 1.1.6
      */
+    @NotNull
     public static FireworkEffect.Type getType(@NotNull String type) {
         switch (type.toUpperCase()) {
             case "BALL_LARGE":

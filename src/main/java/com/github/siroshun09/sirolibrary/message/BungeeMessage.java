@@ -5,7 +5,6 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -79,17 +78,12 @@ public class BungeeMessage {
      */
     @Contract("_, _, _ -> param3")
     @NotNull
-    public static <T extends Collection<? super String>> T copyPartialMatches(@NotNull final String token, @NotNull final Iterable<String> originals, @NotNull final T collection) throws UnsupportedOperationException, IllegalArgumentException {
-        Validate.notNull(token, "Search token cannot be null");
-        Validate.notNull(collection, "Collection cannot be null");
-        Validate.notNull(originals, "Originals cannot be null");
-
+    public static <T extends Collection<? super String>> T copyPartialMatches(@NotNull String token, @NotNull Iterable<String> originals, @NotNull T collection) throws UnsupportedOperationException, IllegalArgumentException {
         for (String string : originals) {
             if (startsWithIgnoreCase(string, token)) {
                 collection.add(string);
             }
         }
-
         return collection;
     }
 
@@ -107,8 +101,7 @@ public class BungeeMessage {
      * @throws NullPointerException     if prefix is null
      * @throws IllegalArgumentException if string is null
      */
-    private static boolean startsWithIgnoreCase(@NotNull final String string, @NotNull final String prefix) throws IllegalArgumentException, NullPointerException {
-        Validate.notNull(string, "Cannot check a null string for a match");
+    private static boolean startsWithIgnoreCase(@NotNull String string, @NotNull String prefix) throws IllegalArgumentException, NullPointerException {
         if (string.length() < prefix.length()) {
             return false;
         }

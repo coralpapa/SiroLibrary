@@ -32,7 +32,7 @@ public class BukkitUtil {
      * @see org.bukkit.scheduler.BukkitScheduler#runTask(Plugin, Runnable)
      */
     @NotNull
-    public static BukkitTask runNextTick(Plugin plugin, Runnable task) {
+    public static BukkitTask runNextTick(@NotNull Plugin plugin, @NotNull Runnable task) {
         return Bukkit.getScheduler().runTask(plugin, task);
     }
 
@@ -46,7 +46,7 @@ public class BukkitUtil {
      * @see org.bukkit.scheduler.BukkitScheduler#runTaskLater(Plugin, Runnable, long)
      */
     @NotNull
-    public static BukkitTask runLater(Plugin plugin, Runnable task, long ticks) {
+    public static BukkitTask runLater(@NotNull Plugin plugin, @NotNull Runnable task, long ticks) {
         return Bukkit.getScheduler().runTaskLater(plugin, task, ticks);
     }
 
@@ -61,7 +61,7 @@ public class BukkitUtil {
      * @see org.bukkit.scheduler.BukkitScheduler#runTaskTimer(Plugin, Runnable, long, long)
      */
     @NotNull
-    public static BukkitTask runTimer(Plugin plugin, Runnable task, long delay, long period) {
+    public static BukkitTask runTimer(@NotNull Plugin plugin, @NotNull Runnable task, long delay, long period) {
         return Bukkit.getScheduler().runTaskTimer(plugin, task, delay, period);
     }
 
@@ -77,7 +77,7 @@ public class BukkitUtil {
      * @see org.bukkit.scheduler.BukkitScheduler#callSyncMethod(Plugin, Callable)
      */
     @NotNull
-    public static <V> Future<V> callSyncMethod(Plugin plugin, Callable<V> task) {
+    public static <V> Future<V> callSyncMethod(@NotNull Plugin plugin, @NotNull Callable<V> task) {
         return Bukkit.getScheduler().callSyncMethod(plugin, task);
     }
 

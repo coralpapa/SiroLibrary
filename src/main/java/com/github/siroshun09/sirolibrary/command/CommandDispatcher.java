@@ -1,7 +1,10 @@
 package com.github.siroshun09.sirolibrary.command;
 
+import com.github.siroshun09.sirolibrary.SiroLibraryBukkit;
+import com.github.siroshun09.sirolibrary.SiroLibraryBungee;
 import net.md_5.bungee.api.ProxyServer;
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -19,8 +22,8 @@ public class CommandDispatcher {
      * @return コマンドの実行が成功したら {@code true}, しなかったら {@code false}
      * @since 1.0.11
      */
-    public static boolean toBukkit(String command) {
-        return Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
+    public static boolean toBukkit(@NotNull String command) {
+        return asPlayer(Bukkit.getConsoleSender(), command);
     }
 
     /**
@@ -30,8 +33,8 @@ public class CommandDispatcher {
      * @return コマンドの実行が成功したら {@code true}, しなかったら {@code false}
      * @since 1.0.11
      */
-    public static boolean toBungee(String command) {
-        return ProxyServer.getInstance().getPluginManager().dispatchCommand(ProxyServer.getInstance().getConsole(), command);
+    public static boolean toBungee(@NotNull String command) {
+        return asPlayer(ProxyServer.getInstance().getConsole(), command);
     }
 
     /**
@@ -42,7 +45,7 @@ public class CommandDispatcher {
      * @return コマンドの実行が成功したら {@code true}, しなかったら {@code false}
      * @since 1.0.11
      */
-    public static boolean asPlayer(org.bukkit.command.CommandSender sender, String command) {
+    public static boolean asPlayer(@NotNull org.bukkit.command.CommandSender sender, @NotNull String command) {
         return Bukkit.dispatchCommand(sender, command);
     }
 
@@ -54,7 +57,7 @@ public class CommandDispatcher {
      * @return コマンドの実行が成功したら {@code true}, しなかったら {@code false}
      * @since 1.0.11
      */
-    public static boolean asPlayer(net.md_5.bungee.api.CommandSender sender, String command) {
+    public static boolean asPlayer(@NotNull net.md_5.bungee.api.CommandSender sender, @NotNull String command) {
         return ProxyServer.getInstance().getPluginManager().dispatchCommand(sender, command);
     }
 
@@ -64,7 +67,7 @@ public class CommandDispatcher {
      * @param commands 実行するコマンドリスト
      * @since 1.0.19
      */
-    public static void runCommands(List<String> commands) {
+    public static void runCommands(@NotNull List<String> commands) {
         runCommands(commands, true);
     }
 
@@ -75,14 +78,18 @@ public class CommandDispatcher {
      * @param isBukkit Bukkit 上かどうか
      * @since 1.0.19
      */
-    public static void runCommands(List<String> commands, boolean isBukkit) {
+    public static void runCommands(@NotNull List<String> commands, boolean isBukkit) {
         if (isBukkit) {
             for (String cmd : commands) {
-                toBukkit(cmd);
+                if (toBukkit(cmd)) {
+                    SiroLibraryBukkit.getInstance().getLogger().warning("コマンド \"" + cmd + "\" を正常に実行できませんでした");
+                }
             }
         } else {
             for (String cmd : commands) {
-                toBungee(cmd);
+                if (toBungee(cmd)) {
+                    SiroLibraryBungee.getInstance().getLogger().warning("コマンド \"" + cmd + "\" を正常に実行できませんでした");
+                }
             }
         }
     }

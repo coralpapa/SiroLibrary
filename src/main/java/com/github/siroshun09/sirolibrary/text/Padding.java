@@ -22,6 +22,7 @@ public class Padding {
      * @return パディングされた16字の文字列
      * @throws IllegalArgumentException {@code name} が3字以上16字以下でない場合
      */
+    @NotNull
     public static String padUserName(@NotNull String name) {
         if (name.length() < 3 || 16 < name.length()) {
             throw new IllegalArgumentException("Name must be between 3 and 16 characters");

@@ -13,10 +13,8 @@ import java.util.concurrent.ScheduledExecutorService;
  * @since 1.0.14
  */
 public class SiroExecutors {
-    private final static ExecutorService executor =
-            Executors.newSingleThreadExecutor(r -> new Thread(r, "SiroLibrary-Thread-1"));
-    private final static ScheduledExecutorService scheduler =
-            Executors.newSingleThreadScheduledExecutor(r -> new Thread(r, "SiroLibrary-Thread-2"));
+    private final static ExecutorService executor = newSingleExecutor("SiroLibrary-Executor");
+    private final static ScheduledExecutorService scheduler = newSingleScheduler("SiroLibrary-Scheduler");
 
     /**
      * @return {@link ExecutorService}
@@ -41,7 +39,7 @@ public class SiroExecutors {
      * @since 1.2.3
      */
     @NotNull
-    public static ExecutorService newSingleExecutor(String name) {
+    public static ExecutorService newSingleExecutor(@NotNull String name) {
         return Executors.newSingleThreadExecutor(r -> new Thread(r, name));
     }
 
@@ -52,7 +50,7 @@ public class SiroExecutors {
      * @since 1.2.3
      */
     @NotNull
-    public static ExecutorService newCachedThreadPool(String name) {
+    public static ExecutorService newCachedThreadPool(@NotNull String name) {
         return Executors.newCachedThreadPool(r -> new Thread(r, name));
     }
 
@@ -64,7 +62,7 @@ public class SiroExecutors {
      * @since 1.2.3
      */
     @NotNull
-    public static ExecutorService newFixedThreadPool(int nThreads, String name) {
+    public static ExecutorService newFixedThreadPool(int nThreads, @NotNull String name) {
         return Executors.newFixedThreadPool(nThreads, r -> new Thread(r, name));
     }
 
@@ -75,7 +73,7 @@ public class SiroExecutors {
      * @since 1.2.3
      */
     @NotNull
-    public static ScheduledExecutorService newSingleScheduler(String name) {
+    public static ScheduledExecutorService newSingleScheduler(@NotNull String name) {
         return Executors.newSingleThreadScheduledExecutor(r -> new Thread(r, name));
     }
 
@@ -87,7 +85,7 @@ public class SiroExecutors {
      * @since 1.2.3
      */
     @NotNull
-    public static ScheduledExecutorService newScheduledThreadPool(int nThreads, String name) {
+    public static ScheduledExecutorService newScheduledThreadPool(int nThreads, @NotNull String name) {
         return Executors.newScheduledThreadPool(nThreads, r -> new Thread(r, name));
     }
 }

@@ -1,5 +1,7 @@
 package com.github.siroshun09.sirolibrary.logging;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,7 +16,7 @@ class WriteTask implements Runnable {
     private final Path filePath;
     private final String log;
 
-    WriteTask(Path filePath, String log) {
+    WriteTask(@NotNull Path filePath, @NotNull String log) {
         this.filePath = filePath;
         this.log = log;
     }
