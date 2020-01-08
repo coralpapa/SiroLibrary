@@ -15,7 +15,7 @@
 -docencoding
 'UTF-8'
 -doctitle
-'SiroLibrary 1.4.3 API'
+'SiroLibrary 1.4.4 API'
 -link
 'https://docs.oracle.com/javase/jp/10/docs/api'
 -link
@@ -34,4 +34,4 @@
 -use
 -version
 -windowtitle
-'SiroLibrary 1.4.3 API'
+'SiroLibrary 1.4.4 API'
