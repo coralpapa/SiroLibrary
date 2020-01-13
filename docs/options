@@ -7,7 +7,7 @@
 'S:/Programs/MCPlugins/SiroLibrary/src/main/java;S:/Programs/MCPlugins/SiroLibrary/target/generated-sources/annotations'
 -author
 -bottom
-'<p class="legalCopy">Copyright &#169; 2019 <a href="https://github.com/Siroshun09">Siroshun09</a>. All rights reserved.</p>'
+'<p class="legalCopy">Copyright &#169; 2019-2020 <a href="https://github.com/Siroshun09">Siroshun09</a>. All rights reserved.</p>'
 -charset
 'UTF-8'
 -d
@@ -15,7 +15,7 @@
 -docencoding
 'UTF-8'
 -doctitle
-'SiroLibrary 1.4.4 API'
+'SiroLibrary 1.4.5 API'
 -link
 'https://docs.oracle.com/javase/jp/10/docs/api'
 -link
@@ -34,4 +34,4 @@
 -use
 -version
 -windowtitle
-'SiroLibrary 1.4.4 API'
+'SiroLibrary 1.4.5 API'
