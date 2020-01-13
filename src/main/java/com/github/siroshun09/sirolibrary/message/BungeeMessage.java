@@ -3,6 +3,7 @@ package com.github.siroshun09.sirolibrary.message;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.jetbrains.annotations.Contract;
@@ -44,6 +45,30 @@ public class BungeeMessage {
      */
     public static void sendMessageWithColor(@NotNull CommandSender sendTo, @NotNull String msg) {
         sendTo.sendMessage(TextComponent.fromLegacyText(setColor(msg)));
+    }
+
+    /**
+     * プロキシに接続しているプレイヤー全員に {@code msg} を送る。
+     *
+     * @param msg 送る文字列
+     * @since 1.4.5
+     */
+    public static void broadcast(@NotNull String msg) {
+        for (ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
+            p.sendMessage(TextComponent.fromLegacyText(msg));
+        }
+    }
+
+    /**
+     * プロキシに接続しているプレイヤー全員に {@code msg} を色付きで送る。
+     *
+     * @param msg 送る文字列
+     * @since 1.4.5
+     */
+    public static void broadcastWithColor(@NotNull String msg) {
+        for (ProxiedPlayer p : ProxyServer.getInstance().getPlayers()) {
+            p.sendMessage(TextComponent.fromLegacyText(setColor(msg)));
+        }
     }
 
     /**
