@@ -1,6 +1,7 @@
 package com.github.siroshun09.sirolibrary;
 
 import com.github.siroshun09.sirolibrary.text.Formatter;
+import com.github.siroshun09.sirolibrary.text.NumberChecker;
 import com.github.siroshun09.sirolibrary.text.Padding;
 import org.bukkit.Location;
 import org.junit.jupiter.api.Assertions;
@@ -52,5 +53,49 @@ public class TextTest {
         Assertions.assertEquals("Name must be between 3 and 16 characters", exception2.getMessage());
 
         Assertions.assertEquals(29, Padding.padDateTime().length());
+    }
+
+    @Test
+    @DisplayName("数字変換テスト")
+    void numberTest() {
+        /* すべての int に対してテストする
+           時間かかりすぎるので普段は省略
+
+        long i = Integer.MIN_VALUE;
+        while (i <= Integer.MAX_VALUE) {
+            String str = String.valueOf(i);
+            Assertions.assertTrue(NumberChecker.isInteger(str));
+            Assertions.assertTrue(NumberChecker.isLong(str));
+            i++;
+        }
+        System.out.println("Int 検査終了: " + i);
+
+
+        while (i < (long) Integer.MAX_VALUE + 10) {
+            String str = String.valueOf(i);
+            Assertions.assertFalse(NumberChecker.isInteger(str));
+            Assertions.assertTrue(NumberChecker.isLong(str));
+            i++;
+        }
+        */
+
+        Assertions.assertTrue(NumberChecker.isInteger("2147483647"));
+        Assertions.assertTrue(NumberChecker.isLong("2147483647"));
+
+        Assertions.assertTrue(NumberChecker.isInteger("-2147483647"));
+        Assertions.assertTrue(NumberChecker.isLong("-2147483647"));
+
+        Assertions.assertTrue(NumberChecker.isInteger("-1234567890"));
+        Assertions.assertTrue(NumberChecker.isLong("-1234567890"));
+
+        Assertions.assertFalse(NumberChecker.isInteger("12345678901"));
+        Assertions.assertTrue(NumberChecker.isLong("12345678901"));
+
+        Assertions.assertFalse(NumberChecker.isInteger("-12345678901"));
+        Assertions.assertTrue(NumberChecker.isLong("-12345678901"));
+
+        Assertions.assertFalse(NumberChecker.isInteger("abcde"));
+        Assertions.assertFalse(NumberChecker.isInteger("13e+5"));
+        Assertions.assertFalse(NumberChecker.isInteger("0x13"));
     }
 }
