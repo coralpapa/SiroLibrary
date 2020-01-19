@@ -36,3 +36,11 @@ Javadoc は上のバッジから閲覧できます。
             <scope>provided</scope>
         </dependency>
 ```
+
+## License
+
+このプロジェクトは GPL-3.0 のもとで公開しています。詳しくは [ライセンスファイル](LICENSE) をお読みください。
+
+This project is licensed under the permissive GPL-3.0 license. Please see [LICENSE](LICENSE) for more info.
+
+Copyright © 2019-2020, Siroshun09
