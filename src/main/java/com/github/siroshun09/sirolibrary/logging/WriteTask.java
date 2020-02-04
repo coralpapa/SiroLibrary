@@ -1,5 +1,6 @@
 package com.github.siroshun09.sirolibrary.logging;
 
+import com.github.siroshun09.sirolibrary.SiroLibraryLogger;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -25,9 +26,18 @@ class WriteTask implements Runnable {
     public void run() {
         try {
             FileLogger.checkFile(filePath);
-            Files.write(filePath, FileLogger.addDate(log).getBytes(), StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+            if (Files.isWritable(filePath))
+                Files.write(filePath, FileLogger.addDate(log, true).getBytes(), StandardOpenOption.APPEND);
+            else printError();
         } catch (IOException e) {
+            printError();
             e.printStackTrace();
         }
+    }
+
+    private void printError() {
+        SiroLibraryLogger.getLogger().severe("ファイルに書き込めませんでした。");
+        SiroLibraryLogger.getLogger().severe("ログ: " + log);
+        SiroLibraryLogger.getLogger().severe("パス: " + filePath.toAbsolutePath().toString());
     }
 }

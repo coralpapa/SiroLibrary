@@ -6,7 +6,7 @@
 
     <groupId>com.github.siroshun09</groupId>
     <artifactId>sirolibrary</artifactId>
-    <version>1.4.6</version>
+    <version>1.4.7</version>
 
     <name>SiroLibrary</name>
     <url>https://github.com/SiroPlugins/SiroLibrary</url>
@@ -34,7 +34,7 @@
 
     <properties>
         <project.charset>UTF-8</project.charset>
-        <java.version>10</java.version>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>${project.charset}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.charset}</project.reporting.outputEncoding>
     </properties>
@@ -54,7 +54,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.15.1-R0.1-SNAPSHOT</version>
+            <version>1.15.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -67,11 +67,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>28.1-jre</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
@@ -143,10 +138,6 @@
                                     <pattern>org.apache.commons</pattern>
                                     <shadedPattern>com.github.siroshun09.dependencies.apache.commons</shadedPattern>
                                 </relocation>
-                                <relocation>
-                                    <pattern>com.google.guava</pattern>
-                                    <shadedPattern>com.github.siroshun09.dependencies.google.guava</shadedPattern>
-                                </relocation>
                             </relocations>
                         </configuration>
                     </execution>
@@ -183,7 +174,6 @@
                     <links>
                         <link>https://docs.oracle.com/javase/jp/13/docs/api/</link>
                         <link>https://commons.apache.org/proper/commons-lang/javadocs/api-3.9/</link>
-                        <link>https://javadoc.scijava.org/Guava/</link>
                         <link>https://hub.spigotmc.org/javadocs/spigot/</link>
                         <link>https://papermc.io/javadocs/waterfall/</link>
                         <link>https://javadoc.io/doc/org.jetbrains/annotations/18.0.0/</link>

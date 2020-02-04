@@ -17,8 +17,8 @@ import java.util.concurrent.ExecutorService;
  * @since 1.0.12
  */
 public class FileLogger {
-    private final static ExecutorService executor = SiroExecutors.newSingleExecutor("SiroLibrary-FileLogger-Thread");
-    private final static String separator = System.getProperty("line.separator");
+    private final static ExecutorService EXECUTOR = SiroExecutors.newSingleExecutor("SiroLibrary-FileLogger-Thread");
+    private final static String SEPARATOR = System.getProperty("line.separator");
 
     private final Path dir;
     private Path filePath;
@@ -38,7 +38,7 @@ public class FileLogger {
      * @since 1.0.12
      */
     public static void write(@NotNull Path file, @NotNull String log) {
-        executor.submit(new WriteTask(file, log));
+        EXECUTOR.submit(new WriteTask(file, log));
     }
 
     /**
@@ -63,7 +63,21 @@ public class FileLogger {
      */
     @NotNull
     public static String addDate(@NotNull String log) {
-        return "[" + Padding.padDateTime() + "] " + log + separator;
+        return "[" + Formatter.getDateTime() + "] " + log + SEPARATOR;
+    }
+
+    /**
+     * 渡された文字列の最初に日時追加し、必要なら改行も追加する。
+     *
+     * @param log          ログ
+     * @param addSeparator 改行が必要かどうか
+     * @return 追記したログ
+     * @see FileLogger#addDate(String)
+     * @since 1.4.7
+     */
+    @NotNull
+    public static String addDate(@NotNull String log, boolean addSeparator) {
+        return addSeparator ? addDate(log) : "[" + Formatter.getDateTime() + "] " + log;
     }
 
     /**
@@ -88,6 +102,6 @@ public class FileLogger {
      */
     public void write(@NotNull String log) {
         checkDate();
-        executor.submit(new WriteTask(filePath, log));
+        EXECUTOR.submit(new WriteTask(filePath, log));
     }
 }

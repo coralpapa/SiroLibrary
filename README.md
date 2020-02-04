@@ -5,9 +5,9 @@
 ![GitHub](https://img.shields.io/github/license/SiroPlugins/SiroLibrary)
 [![Bintray](https://img.shields.io/bintray/v/siroshun/maven-repo/SiroLibrary?color=orange&label=Javadoc)](https://siroplugins.github.io/SiroLibrary/)
 
-Spigot や BungeeCode のプラグインを開発する上で、何度も使うコードを集めたライブラリです。
+Spigot や BungeeCord のプラグインを開発する上で、何度も使うコードを集めたライブラリです。
 
-また、commons-lang3 や Guava (28-jre) などのライブラリも含まれます。
+また、commons-lang3 などのライブラリも含まれます。
 
 このライブラリを使ったプラグインをサーバーで使う場合、SiroLibrary 自体もプラグインとして導入する必要があります。
 
@@ -15,8 +15,8 @@ Jar ファイルは上のバッジからダウンロード可能です。
 
 ## Requirements
 
-- Java 10+
-- Spigot or BungeeCode (Minecraft Version 1.15+)
+- Java 11+
+- Spigot or BungeeCord (Minecraft Version 1.15+)
 
 ## Usage (Maven)
 
@@ -32,7 +32,7 @@ Javadoc は上のバッジから閲覧できます。
         <dependency>
             <groupId>com.github.siroshun09</groupId>
             <artifactId>sirolibrary</artifactId>
-            <version>1.4.6</version>
+            <version>1.4.7</version>
             <scope>provided</scope>
         </dependency>
 ```

@@ -17,6 +17,7 @@ public class SiroLibraryBukkit extends JavaPlugin {
      */
     public SiroLibraryBukkit() {
         instance = this;
+        SiroLibraryLogger.setLogger(getLogger());
     }
 
     /**

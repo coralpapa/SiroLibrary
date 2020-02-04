@@ -17,6 +17,7 @@ public class SiroLibraryBungee extends Plugin {
      */
     public SiroLibraryBungee() {
         instance = this;
+        SiroLibraryLogger.setLogger(getLogger());
     }
 
     /**

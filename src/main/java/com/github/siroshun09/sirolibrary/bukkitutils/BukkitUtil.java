@@ -7,6 +7,7 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
@@ -161,5 +162,73 @@ public class BukkitUtil {
      */
     public static void callEvent(@NotNull Event event) {
         Bukkit.getPluginManager().callEvent(event);
+    }
+
+    /**
+     * {@code permission} がすでに存在(登録)されているか。
+     *
+     * @param permission 権限
+     * @return 存在していれば {@code true}, していなければ {@code false}
+     * @since 1.4.7
+     */
+    public static boolean existPermission(@NotNull Permission permission) {
+        return Bukkit.getPluginManager().getPermissions().contains(permission);
+    }
+
+    /**
+     * {@code permission} がすでに存在(登録)されているか。
+     *
+     * @param permission 権限
+     * @return 存在していれば {@code true}, していなければ {@code false}
+     * @since 1.4.7
+     */
+    public static boolean existPermission(@NotNull String permission) {
+        return Bukkit.getPluginManager().getPermission(permission) != null;
+    }
+
+    /**
+     * {@code permission} を登録する。
+     *
+     * @param permission 権限
+     * @throws IllegalArgumentException {@code permission} がすでに存在している時
+     * @see org.bukkit.plugin.PluginManager#addPermission(Permission)
+     * @since 1.4.7
+     */
+    public static void addPermission(@NotNull Permission permission) {
+        Bukkit.getPluginManager().addPermission(permission);
+    }
+
+    /**
+     * {@code permission} を登録する。
+     *
+     * @param permission 権限
+     * @throws IllegalArgumentException {@code permission} がすでに存在している時
+     * @see org.bukkit.plugin.PluginManager#addPermission(Permission)
+     * @since 1.4.7
+     */
+    public static void addPermission(@NotNull String permission) {
+        addPermission(new Permission(permission));
+    }
+
+    /**
+     * {@code permission} を削除する。
+     *
+     * @param permission 権限
+     * @see org.bukkit.plugin.PluginManager#removePermission(Permission)
+     * @since 1.4.7
+     */
+    public static void removePermission(@NotNull Permission permission) {
+        Bukkit.getPluginManager().removePermission(permission);
+    }
+
+    /**
+     * {@code permission} を削除する。
+     *
+     * @param permission 権限
+     * @see org.bukkit.plugin.PluginManager#removePermission(Permission)
+     * @since 1.4.7
+     */
+    public static void removePermission(@NotNull String permission) {
+        removePermission(new Permission(permission));
     }
 }
