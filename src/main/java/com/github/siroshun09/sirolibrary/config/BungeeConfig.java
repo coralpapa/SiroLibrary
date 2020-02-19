@@ -18,6 +18,8 @@ public class BungeeConfig extends BungeeYaml {
 
     /**
      * コンストラクタ
+     * <p>
+     * コンストラクタが呼び出された時点で Yaml ファイルを読み込む。
      *
      * @param plugin       プラグイン (データフォルダーの取得とロガーとして使われる)
      * @param fileName     Yaml ファイルの名前 (.yml も含む)
@@ -36,7 +38,7 @@ public class BungeeConfig extends BungeeYaml {
      * @see BungeeConfig#create()
      */
     @Override
-    protected void load() {
+    public void load() {
         if (FileUtil.isNotExist(filePath)) this.create();
         try {
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(filePath.toFile());

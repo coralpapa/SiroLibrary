@@ -1,5 +1,9 @@
 # 変更履歴
 
+## 1.5.1
+
+- Fix - 1.5.0 の BukkitConfig, BungeeConfig にて、リソースからファイルを作成しない問題
+
 ## 1.5.0
 
 - BukkitYaml, BungeeYaml - ただの Yaml として読み込みたいときに使用

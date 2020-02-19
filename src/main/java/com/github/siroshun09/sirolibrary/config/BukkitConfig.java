@@ -15,6 +15,8 @@ public class BukkitConfig extends BukkitYaml {
 
     /**
      * コンストラクタ
+     * <p>
+     * コンストラクタが呼び出された時点で Yaml ファイルを読み込む。
      *
      * @param plugin       プラグイン
      * @param fileName     Yaml ファイルの名前 (.yml も含む)
@@ -33,8 +35,8 @@ public class BukkitConfig extends BukkitYaml {
      * @see BukkitConfig#create()
      */
     @Override
-    protected void load() {
-        if (FileUtil.isNotExist(filePath)) create();
+    public void load() {
+        if (FileUtil.isNotExist(filePath)) this.create();
         config = YamlConfiguration.loadConfiguration(filePath.toFile());
     }
 

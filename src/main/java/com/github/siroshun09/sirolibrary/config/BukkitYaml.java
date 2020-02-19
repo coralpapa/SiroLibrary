@@ -21,6 +21,8 @@ public class BukkitYaml {
 
     /**
      * コンストラクタ
+     * <p>
+     * コンストラクタを呼び出した時点では Yaml ファイルを読み込まないので、 {@link BukkitYaml#load()} を実行する必要がある。
      *
      * @param plugin   プラグイン
      * @param filePath Yaml ファイルへのパス
@@ -28,8 +30,6 @@ public class BukkitYaml {
     public BukkitYaml(@NotNull Plugin plugin, @NotNull Path filePath) {
         this.plugin = plugin;
         this.filePath = filePath;
-        load();
-        plugin.getLogger().info(filePath.getFileName().toString() + " を読み込みました");
     }
 
     /**
@@ -37,9 +37,10 @@ public class BukkitYaml {
      *
      * @see BukkitYaml#create()
      */
-    protected void load() {
+    public void load() {
         if (FileUtil.isNotExist(filePath)) create();
         config = YamlConfiguration.loadConfiguration(filePath.toFile());
+        plugin.getLogger().info(filePath.getFileName().toString() + " を読み込みました");
     }
 
     /**

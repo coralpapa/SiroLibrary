@@ -20,14 +20,17 @@ public class BungeeYaml {
 
     protected Configuration config;
 
+    /**
+     * コンストラクタ
+     * <p>
+     * コンストラクタを呼び出した時点では Yaml ファイルを読み込まないので、 {@link BungeeYaml#load()} を実行する必要がある。
+     *
+     * @param plugin   プラグイン
+     * @param filePath Yaml ファイルへのパス
+     */
     public BungeeYaml(@NotNull Plugin plugin, @NotNull Path filePath) {
         this.plugin = plugin;
         this.filePath = filePath;
-        load();
-
-        if (config != null) {
-            plugin.getLogger().info(filePath.getFileName().toString() + " を読み込みました");
-        }
     }
 
     /**
@@ -35,10 +38,11 @@ public class BungeeYaml {
      *
      * @see BungeeYaml#create()
      */
-    protected void load() {
+    public void load() {
         if (FileUtil.isNotExist(filePath)) create();
         try {
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(filePath.toFile());
+            plugin.getLogger().info(filePath.getFileName().toString() + " を読み込みました");
         } catch (IOException e) {
             plugin.getLogger().severe(filePath.getFileName().toString() + " の読み込みに失敗しました");
             e.printStackTrace();
