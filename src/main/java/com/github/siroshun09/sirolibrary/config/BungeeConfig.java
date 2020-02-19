@@ -1,7 +1,7 @@
 package com.github.siroshun09.sirolibrary.config;
 
+import com.github.siroshun09.sirolibrary.file.FileUtil;
 import net.md_5.bungee.api.plugin.Plugin;
-import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
@@ -9,37 +9,24 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * BungeeCord で Yaml ファイルをロードしたり保存したりするクラス
  */
-public class BungeeConfig {
-    private final Plugin plugin;
-    private final Path filePath;
-    private final boolean resource;
-    private Configuration config;
+public class BungeeConfig extends BungeeYaml {
+    private final boolean fromResource;
 
     /**
      * コンストラクタ
      *
-     * @param plugin   プラグイン (データフォルダーの取得とロガーとして使われる)
-     * @param fileName Yaml ファイルの名前 (.yml も含む)
-     * @param resource ファイルが存在しない場合、プラグインリソースからコピーするか
+     * @param plugin       プラグイン (データフォルダーの取得とロガーとして使われる)
+     * @param fileName     Yaml ファイルの名前 (.yml も含む)
+     * @param fromResource ファイルが存在しない場合、プラグインリソースからコピーするか
      */
-    public BungeeConfig(@NotNull Plugin plugin, @NotNull String fileName, boolean resource) {
-        this.plugin = plugin;
-        filePath = plugin.getDataFolder().toPath().resolve(fileName);
-        this.resource = resource;
+    public BungeeConfig(@NotNull Plugin plugin, @NotNull String fileName, boolean fromResource) {
+        super(plugin, plugin.getDataFolder().toPath().resolve(fileName));
 
-        try {
-            Files.createDirectories(plugin.getDataFolder().toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        this.fromResource = fromResource;
         load();
     }
 
@@ -48,166 +35,65 @@ public class BungeeConfig {
      *
      * @see BungeeConfig#create()
      */
-    private void load() {
-        if (!Files.exists(filePath)) create();
-
+    @Override
+    protected void load() {
+        if (FileUtil.isNotExist(filePath)) this.create();
         try {
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(filePath.toFile());
         } catch (IOException e) {
             plugin.getLogger().severe(filePath.getFileName().toString() + " の読み込みに失敗しました");
             e.printStackTrace();
         }
-
-        plugin.getLogger().info(filePath.getFileName().toString() + " を読み込みました");
     }
 
     /**
      * Yaml ファイルを作成する。
-     * 要求元プラグインのリソースからのコピーが要求されているも、存在しない場合は {@link IllegalArgumentException} が発生する。
+     * <p>
+     * {@code fromResource} が {@code true} の場合、{@code plugin} からコピーされる。
      *
-     * @throws IllegalArgumentException {@link BungeeConfig#resource} が true で、プラグインリソースにファイルが存在しない場合
+     * @see BungeeYaml#createFile()
+     * @see BungeeConfig#createFromResource()
      */
-    private void create() {
-        if (resource) {
-            InputStream in = plugin.getResourceAsStream(filePath.getFileName().toString());
-
-            if (in == null) {
-                plugin.getLogger().warning(filePath.getFileName().toString() + " は PL に含まれていません");
-                plugin.getLogger().warning("PL 製作者に問い合わせてください");
-                return;
+    @Override
+    protected void create() {
+        try {
+            if (fromResource) {
+                FileUtil.createParentDirectories(filePath);
+                createFromResource();
+            } else {
+                createFile();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-            try {
-                Files.copy(in, filePath);
-            } catch (IOException e) {
-                plugin.getLogger().severe("ファイルの作成に失敗しました: " + filePath);
-                e.printStackTrace();
-            }
+    /**
+     * プラグインのリソースからコピーし、新しい Yaml ファイルを作成する。
+     */
+    private void createFromResource() {
+        InputStream in = plugin.getResourceAsStream(filePath.getFileName().toString());
+
+        if (in == null) {
+            plugin.getLogger().severe("プラグインに " + filePath.getFileName().toString() + " がありません。");
             return;
         }
 
         try {
-            Files.createFile(filePath);
+            Files.copy(in, filePath);
+            plugin.getLogger().info("ファイルを作成しました: " + filePath.getFileName().toString());
         } catch (IOException e) {
-            plugin.getLogger().severe("ファイルの作成に失敗しました: " + filePath);
+            plugin.getLogger().severe("ファイルの作成に失敗しました: " + filePath.toString());
             e.printStackTrace();
         }
-
-        plugin.getLogger().info("ファイルを作成しました: " + filePath);
     }
 
     /**
      * メモリ上の Yaml データを再読み込みする
      */
+    @Override
     public void reload() {
-        if (!Files.exists(filePath)) create();
-
-        try {
-            config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(filePath.toFile());
-        } catch (IOException e) {
-            plugin.getLogger().severe(filePath.getFileName().toString() + " の読み込みに失敗しました");
-            e.printStackTrace();
-        }
-
-        plugin.getLogger().info(filePath.getFileName().toString() + " を再読み込みました");
-    }
-
-    /**
-     * {@link Configuration} として取得する。
-     *
-     * @return {@link Configuration}
-     */
-    public Configuration getConfig() {
-        return config;
-    }
-
-    /**
-     * メモリに乗っている設定値を Yaml ファイルに上書き保存する。
-     * ファイルが存在しない場合、新しく作成される。
-     *
-     * @see BungeeConfig#create()
-     */
-    public void save() {
-        if (!Files.exists(filePath)) create();
-
-        try {
-            ConfigurationProvider.getProvider(YamlConfiguration.class).save(getConfig(), filePath.toFile());
-        } catch (IOException e) {
-            plugin.getLogger().severe("ファイルの保存に失敗しました: " + filePath);
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * {@code key} の設定値を {@code boolean}で取得する。
-     *
-     * @param key 設定キー
-     * @param def デフォルト値
-     * @return 設定値、取得できない場合デフォルト値
-     * @since 1.0.16
-     */
-    public boolean getBoolean(@NotNull String key, boolean def) {
-        return config.getBoolean(key, def);
-    }
-
-    /**
-     * {@code key} の設定値を {@code double}で取得する。
-     *
-     * @param key 設定キー
-     * @param def デフォルト値
-     * @return 設定値、取得できない場合デフォルト値
-     * @since 1.0.16
-     */
-    public double getDouble(@NotNull String key, double def) {
-        return config.getDouble(key, def);
-    }
-
-    /**
-     * {@code key} の設定値を {@code int}で取得する。
-     *
-     * @param key 設定キー
-     * @param def デフォルト値
-     * @return 設定値、取得できない場合デフォルト値
-     * @since 1.0.16
-     */
-    public int getInt(@NotNull String key, int def) {
-        return config.getInt(key, def);
-    }
-
-    /**
-     * {@code key} の設定値を {@code long}で取得する。
-     *
-     * @param key 設定キー
-     * @param def デフォルト値
-     * @return 設定値、取得できない場合デフォルト値
-     * @since 1.0.16
-     */
-    public long getLong(@NotNull String key, long def) {
-        return config.getLong(key, def);
-    }
-
-    /**
-     * {@code key} の設定値を文字列で取得する。
-     *
-     * @param key 設定キー
-     * @param def デフォルト値
-     * @return 設定値、それが {@code null} の場合デフォルト値
-     * @since 1.0.16
-     */
-    @NotNull
-    public String getString(@NotNull String key, @NotNull String def) {
-        return Objects.requireNonNullElse(config.getString(key), def);
-    }
-
-    /**
-     * {@code key} の設定値を文字列のリストで取得する。
-     *
-     * @param key 設定キー
-     * @return 設定値、なければ空のリスト
-     * @since 1.0.16
-     */
-    @NotNull
-    public List<String> getStringList(@NotNull String key) {
-        return config.getStringList(key);
+        load();
+        plugin.getLogger().info(filePath.getFileName().toString() + " を再読み込みしました");
     }
 }

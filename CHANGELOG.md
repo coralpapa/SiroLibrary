@@ -1,5 +1,11 @@
 # 変更履歴
 
+## 1.5.0
+
+- BukkitYaml, BungeeYaml - ただの Yaml として読み込みたいときに使用
+- BukkitConfig, BungeeConfig - BukkitYaml を拡張する
+- 上のクラス内のコードを改善
+
 ## 1.4.9
 
 - FileUtil - ファイル操作系のメソッド類
