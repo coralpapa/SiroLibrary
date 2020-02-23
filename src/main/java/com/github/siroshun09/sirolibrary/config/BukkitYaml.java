@@ -7,6 +7,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -22,14 +23,49 @@ public class BukkitYaml {
     /**
      * コンストラクタ
      * <p>
-     * コンストラクタを呼び出した時点では Yaml ファイルを読み込まないので、 {@link BukkitYaml#load()} を実行する必要がある。
+     * このコンストラクタでは {@link BukkitYaml#load()} の実行を必要とする。
      *
-     * @param plugin   プラグイン
+     * @param plugin   プラグイン (ロギングが有効になる)
      * @param filePath Yaml ファイルへのパス
      */
     public BukkitYaml(@NotNull Plugin plugin, @NotNull Path filePath) {
-        this.plugin = plugin;
+        this(filePath, plugin, false);
+    }
+
+    /**
+     * コンストラクタ
+     * <p>
+     * このコンストラクタでは {@link BukkitYaml#load()} の実行を必要とする。
+     *
+     * @param filePath Yaml ファイルへのパス
+     */
+    public BukkitYaml(@NotNull Path filePath) {
+        this(filePath, null, false);
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param filePath Yaml ファイルへのパス
+     * @param autoLoad 自動的に読み込むか
+     */
+    public BukkitYaml(@NotNull Path filePath, boolean autoLoad) {
+        this(filePath, null, autoLoad);
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param filePath Yaml ファイルへのパス
+     * @param plugin   プラグイン (ロギングが有効になる)
+     * @param autoLoad 自動的に読み込むか
+     */
+    public BukkitYaml(@NotNull Path filePath, @Nullable Plugin plugin, boolean autoLoad) {
         this.filePath = filePath;
+        this.plugin = plugin;
+        if (autoLoad) {
+            load();
+        }
     }
 
     /**
@@ -40,7 +76,7 @@ public class BukkitYaml {
     public void load() {
         if (FileUtil.isNotExist(filePath)) create();
         config = YamlConfiguration.loadConfiguration(filePath.toFile());
-        plugin.getLogger().info(filePath.getFileName().toString() + " を読み込みました");
+        printInfo(filePath.getFileName().toString() + " を読み込みました");
     }
 
     /**
@@ -57,11 +93,11 @@ public class BukkitYaml {
         try {
             FileUtil.createDirAndFile(filePath);
         } catch (IOException e) {
-            plugin.getLogger().severe("ファイルの作成に失敗しました: " + filePath.toString());
+            printSevere("ファイルの作成に失敗しました: " + filePath.toString());
             e.printStackTrace();
             return;
         }
-        plugin.getLogger().info("ファイルを作成しました: " + filePath.toString());
+        printInfo("ファイルを作成しました: " + filePath.toString());
     }
 
     /**
@@ -69,7 +105,7 @@ public class BukkitYaml {
      */
     public void reload() {
         load();
-        plugin.getLogger().info(filePath.getFileName().toString() + " を再読み込みしました");
+        printInfo(filePath.getFileName().toString() + " を再読み込みしました");
     }
 
     /**
@@ -93,12 +129,12 @@ public class BukkitYaml {
             if (FileUtil.isNotExist(filePath)) createFile();
             getConfig().save(filePath.toFile());
         } catch (IOException e) {
-            plugin.getLogger().severe("ファイルの保存に失敗しました: " + filePath);
+            printSevere("ファイルの保存に失敗しました: " + filePath);
             e.printStackTrace();
             return;
         }
 
-        plugin.getLogger().info("ファイルに保存しました: " + filePath.getFileName().toString());
+        printInfo("ファイルに保存しました: " + filePath.getFileName().toString());
     }
 
     /**
@@ -189,5 +225,17 @@ public class BukkitYaml {
     @NotNull
     public ItemStack getItemStack(@NotNull String key, @NotNull ItemStack def) {
         return Objects.requireNonNullElse(config.getItemStack(key), def);
+    }
+
+    protected void printInfo(String log) {
+        if (plugin != null) {
+            plugin.getLogger().info(log);
+        }
+    }
+
+    protected void printSevere(String log) {
+        if (plugin != null) {
+            plugin.getLogger().severe(log);
+        }
     }
 }

@@ -23,14 +23,49 @@ public class BungeeYaml {
     /**
      * コンストラクタ
      * <p>
-     * コンストラクタを呼び出した時点では Yaml ファイルを読み込まないので、 {@link BungeeYaml#load()} を実行する必要がある。
+     * このコンストラクタでは {@link BungeeYaml#load()} の実行を必要とする。
      *
-     * @param plugin   プラグイン
+     * @param plugin   プラグイン (ロギングが有効になる)
      * @param filePath Yaml ファイルへのパス
      */
     public BungeeYaml(@NotNull Plugin plugin, @NotNull Path filePath) {
-        this.plugin = plugin;
+        this(filePath, plugin, false);
+    }
+
+    /**
+     * コンストラクタ
+     * <p>
+     * このコンストラクタでは {@link BungeeYaml#load()} の実行を必要とする。
+     *
+     * @param filePath Yaml ファイルへのパス
+     */
+    public BungeeYaml(@NotNull Path filePath) {
+        this(filePath, null, false);
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param filePath Yaml ファイルへのパス
+     * @param autoLoad 自動的に読み込むか
+     */
+    public BungeeYaml(@NotNull Path filePath, boolean autoLoad) {
+        this(filePath, null, autoLoad);
+    }
+
+    /**
+     * コンストラクタ
+     *
+     * @param filePath Yaml ファイルへのパス
+     * @param plugin   プラグイン (ロギングが有効になる)
+     * @param autoLoad 自動的に読み込むか
+     */
+    public BungeeYaml(@NotNull Path filePath, @Nullable Plugin plugin, boolean autoLoad) {
         this.filePath = filePath;
+        this.plugin = plugin;
+        if (autoLoad) {
+            load();
+        }
     }
 
     /**
