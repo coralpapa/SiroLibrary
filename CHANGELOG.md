@@ -1,5 +1,13 @@
 # 変更履歴
 
+## 1.5.3
+
+- HikariCP を Relocate する
+
+## 1.5.2
+
+- BukkitYaml, BungeeYaml のコンストラクタの種類を増やす
+
 ## 1.5.1
 
 - Fix - 1.5.0 の BukkitConfig, BungeeConfig にて、リソースからファイルを作成しない問題

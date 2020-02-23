@@ -6,7 +6,7 @@
 
     <groupId>com.github.siroshun09</groupId>
     <artifactId>sirolibrary</artifactId>
-    <version>1.5.2</version>
+    <version>1.5.3</version>
 
     <name>SiroLibrary</name>
     <url>https://github.com/SiroPlugins/SiroLibrary</url>
@@ -142,6 +142,10 @@
                                 <relocation>
                                     <pattern>org.apache.commons</pattern>
                                     <shadedPattern>com.github.siroshun09.dependencies.apache.commons</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>com.zaxxer</pattern>
+                                    <shadedPattern>com.github.siroshun09.dependencies.zaxxer</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
