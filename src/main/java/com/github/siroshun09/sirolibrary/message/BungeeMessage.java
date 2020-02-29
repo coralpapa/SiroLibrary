@@ -6,6 +6,7 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Plugin;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -80,6 +81,28 @@ public class BungeeMessage {
      */
     public static void sendActionBar(@NotNull ProxiedPlayer sendTo, @NotNull String msg) {
         sendTo.sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(msg));
+    }
+
+    /**
+     * コンソールにプラグインが有効化されたことを流す。
+     *
+     * @param plugin 有効化されたプラグイン
+     * @since 1.5.4
+     */
+    public static void printEnabledMsg(@NotNull Plugin plugin) {
+        plugin.getLogger().info(
+                plugin.getDescription().getName() + " v" + plugin.getDescription().getVersion() + " has been successfully enabled.");
+    }
+
+    /**
+     * コンソールにプラグインが無効化されたことを流す。
+     *
+     * @param plugin 無効化されたプラグイン
+     * @since 1.5.4
+     */
+    public static void printDisabledMsg(@NotNull Plugin plugin) {
+        plugin.getLogger().info(
+                plugin.getDescription().getName() + " v" + plugin.getDescription().getVersion() + " has been successfully disabled.");
     }
 
     /**

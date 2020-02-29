@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -99,5 +100,24 @@ public class BukkitMessage {
      */
     public static void sendActionBar(@NotNull Player sendTo, @NotNull String msg) {
         sendTo.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(setColor(msg)));
+    }
+
+    /**
+     * コンソールにプラグインが有効化されたことを流す。
+     *
+     * @param plugin 有効化されたプラグイン
+     * @since 1.5.4
+     */
+    public static void printEnabledMsg(@NotNull Plugin plugin) {
+        plugin.getLogger().info(plugin.getName() + " v" + plugin.getDescription().getVersion() + " has been successfully enabled.");
+    }
+
+    /**
+     * コンソールにプラグインが無効化されたことを流す。
+     *
+     * @param plugin 無効化されたプラグイン
+     */
+    public static void printDisabledMsg(@NotNull Plugin plugin) {
+        plugin.getLogger().info(plugin.getName() + " v" + plugin.getDescription().getVersion() + " has been successfully disabled.");
     }
 }
