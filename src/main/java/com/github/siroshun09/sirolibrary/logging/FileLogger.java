@@ -42,18 +42,6 @@ public class FileLogger {
     }
 
     /**
-     * 日付を確認し、必要に応じてログファイルを更新する。
-     *
-     * @since 1.2.4
-     */
-    private void checkDate() {
-        if (!date.equals(LocalDate.now())) {
-            date = LocalDate.now();
-            filePath = dir.resolve(Formatter.getDate(date) + ".log");
-        }
-    }
-
-    /**
      * 渡された文字列の最初に日時を、最後に改行を追加する。
      *
      * @param log ログ
@@ -91,6 +79,18 @@ public class FileLogger {
         if (!Files.exists(file)) {
             Files.createDirectories(file.getParent());
             Files.createFile(file);
+        }
+    }
+
+    /**
+     * 日付を確認し、必要に応じてログファイルを更新する。
+     *
+     * @since 1.2.4
+     */
+    private void checkDate() {
+        if (!date.equals(LocalDate.now())) {
+            date = LocalDate.now();
+            filePath = dir.resolve(Formatter.getDate(date) + ".log");
         }
     }
 

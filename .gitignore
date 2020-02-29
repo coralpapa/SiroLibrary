@@ -2,5 +2,5 @@
 /target/
 /SiroLibrary.iml
 /dependency-reduced-pom.xml
-/javadoc/
-/jar/
+
+*.bat

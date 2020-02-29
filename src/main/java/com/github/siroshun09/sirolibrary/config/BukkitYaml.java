@@ -76,7 +76,7 @@ public class BukkitYaml {
     public void load() {
         if (FileUtil.isNotExist(filePath)) create();
         config = YamlConfiguration.loadConfiguration(filePath.toFile());
-        printInfo(filePath.getFileName().toString() + " を読み込みました");
+        printInfo("Loaded " + filePath.getFileName().toString());
     }
 
     /**
@@ -92,12 +92,13 @@ public class BukkitYaml {
     protected void createFile() {
         try {
             FileUtil.createDirAndFile(filePath);
+            printInfo("Created the file: " + filePath.toString());
         } catch (IOException e) {
-            printSevere("ファイルの作成に失敗しました: " + filePath.toString());
+            printSevere("Failed to create file: " + filePath.toString());
             e.printStackTrace();
             return;
         }
-        printInfo("ファイルを作成しました: " + filePath.toString());
+        printInfo("Created the file" + filePath.toString());
     }
 
     /**
@@ -105,7 +106,7 @@ public class BukkitYaml {
      */
     public void reload() {
         load();
-        printInfo(filePath.getFileName().toString() + " を再読み込みしました");
+        printInfo("Reloaded " + filePath.getFileName().toString());
     }
 
     /**
@@ -129,12 +130,11 @@ public class BukkitYaml {
             if (FileUtil.isNotExist(filePath)) createFile();
             getConfig().save(filePath.toFile());
         } catch (IOException e) {
-            printSevere("ファイルの保存に失敗しました: " + filePath);
+            printSevere("Failed to save config data: " + filePath);
             e.printStackTrace();
             return;
         }
-
-        printInfo("ファイルに保存しました: " + filePath.getFileName().toString());
+        printInfo("Save config data to file: " + filePath.getFileName().toString());
     }
 
     /**
@@ -227,12 +227,26 @@ public class BukkitYaml {
         return Objects.requireNonNullElse(config.getItemStack(key), def);
     }
 
+    /**
+     * ログを {@link java.util.logging.Level#INFO}でコンソールに流す。
+     * <p>
+     * {@link Plugin} インスタンスが渡されていない場合、流れない。
+     *
+     * @param log 流すログ
+     */
     protected void printInfo(String log) {
         if (plugin != null) {
             plugin.getLogger().info(log);
         }
     }
 
+    /**
+     * ログを {@link java.util.logging.Level#SEVERE}でコンソールに流す。
+     * <p>
+     * {@link Plugin} インスタンスが渡されていない場合、流れない。
+     *
+     * @param log 流すログ
+     */
     protected void printSevere(String log) {
         if (plugin != null) {
             plugin.getLogger().severe(log);

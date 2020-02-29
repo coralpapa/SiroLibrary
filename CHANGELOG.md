@@ -1,5 +1,11 @@
 # 変更履歴
 
+## 1.5.4
+
+- BukkitMessage, BungeeMessage - プラグインの有効/無効ログ
+- config パッケージ - ロギングを英語化
+- コード整形
+
 ## 1.5.3
 
 - HikariCP を Relocate する

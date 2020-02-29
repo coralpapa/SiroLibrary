@@ -26,7 +26,7 @@ public class BukkitConfig extends BukkitYaml {
         super(plugin, plugin.getDataFolder().toPath().resolve(fileName));
         this.fromResource = fromResource;
         load();
-        plugin.getLogger().info(filePath.getFileName().toString() + " を読み込みました");
+        printInfo("Loaded " + filePath.getFileName().toString());
     }
 
     /**
@@ -68,9 +68,9 @@ public class BukkitConfig extends BukkitYaml {
     private void createFromResource() {
         if (plugin.getResource(filePath.getFileName().toString()) != null) {
             plugin.saveResource(filePath.getFileName().toString(), false);
-            plugin.getLogger().info("ファイルを作成しました: " + filePath);
+            printInfo("Created the file: " + filePath.toString());
         } else {
-            plugin.getLogger().severe("プラグインに " + filePath.getFileName().toString() + " がありません。");
+            printSevere("Failed to copy file from resource: " + filePath.getFileName().toString());
         }
     }
 
@@ -79,6 +79,6 @@ public class BukkitConfig extends BukkitYaml {
      */
     public void reload() {
         load();
-        plugin.getLogger().info(filePath.getFileName().toString() + " を再読み込みしました");
+        printInfo("Reloaded " + filePath.getFileName().toString());
     }
 }

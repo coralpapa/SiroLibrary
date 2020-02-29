@@ -77,9 +77,9 @@ public class BungeeYaml {
         if (FileUtil.isNotExist(filePath)) create();
         try {
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(filePath.toFile());
-            plugin.getLogger().info(filePath.getFileName().toString() + " を読み込みました");
+            printInfo("Loaded " + filePath.getFileName().toString());
         } catch (IOException e) {
-            plugin.getLogger().severe(filePath.getFileName().toString() + " の読み込みに失敗しました");
+            printSevere("Failed to load " + filePath.getFileName().toString());
             e.printStackTrace();
         }
     }
@@ -98,11 +98,11 @@ public class BungeeYaml {
         try {
             FileUtil.createDirAndFile(filePath);
         } catch (IOException e) {
-            plugin.getLogger().severe("ファイルの作成に失敗しました: " + filePath);
+            printSevere("Failed to create file: " + filePath.toString());
             e.printStackTrace();
             return;
         }
-        plugin.getLogger().info("ファイルを作成しました: " + filePath);
+        printInfo("Created the file: " + filePath.toString());
     }
 
     /**
@@ -110,7 +110,7 @@ public class BungeeYaml {
      */
     public void reload() {
         load();
-        plugin.getLogger().info(filePath.getFileName().toString() + " を再読み込みました");
+        printInfo("Reloaded " + filePath.getFileName().toString());
     }
 
     /**
@@ -136,12 +136,11 @@ public class BungeeYaml {
             if (FileUtil.isNotExist(filePath)) createFile();
             ConfigurationProvider.getProvider(YamlConfiguration.class).save(getConfig(), filePath.toFile());
         } catch (IOException e) {
-            plugin.getLogger().severe("ファイルの保存に失敗しました: " + filePath);
+            printSevere("Failed to save config data: " + filePath);
             e.printStackTrace();
             return;
         }
-
-        plugin.getLogger().info("ファイルに保存しました: " + filePath.getFileName().toString());
+        printInfo("Save config data to file: " + filePath.getFileName().toString());
     }
 
     /**
@@ -227,5 +226,31 @@ public class BungeeYaml {
             return new ArrayList<>();
         }
         return config.getStringList(key);
+    }
+
+    /**
+     * ログを {@link java.util.logging.Level#INFO}でコンソールに流す。
+     * <p>
+     * {@link Plugin} インスタンスが渡されていない場合、流れない。
+     *
+     * @param log 流すログ
+     */
+    protected void printInfo(String log) {
+        if (plugin != null) {
+            plugin.getLogger().info(log);
+        }
+    }
+
+    /**
+     * ログを {@link java.util.logging.Level#SEVERE}でコンソールに流す。
+     * <p>
+     * {@link Plugin} インスタンスが渡されていない場合、流れない。
+     *
+     * @param log 流すログ
+     */
+    protected void printSevere(String log) {
+        if (plugin != null) {
+            plugin.getLogger().severe(log);
+        }
     }
 }

@@ -42,8 +42,9 @@ public class BungeeConfig extends BungeeYaml {
         if (FileUtil.isNotExist(filePath)) this.create();
         try {
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(filePath.toFile());
+            printInfo("Loaded " + filePath.getFileName().toString());
         } catch (IOException e) {
-            plugin.getLogger().severe(filePath.getFileName().toString() + " の読み込みに失敗しました");
+            printSevere("Failed to load " + filePath.getFileName().toString());
             e.printStackTrace();
         }
     }
@@ -66,6 +67,7 @@ public class BungeeConfig extends BungeeYaml {
                 createFile();
             }
         } catch (IOException e) {
+            printSevere("Failed to create file: " + filePath.toString());
             e.printStackTrace();
         }
     }
@@ -73,21 +75,16 @@ public class BungeeConfig extends BungeeYaml {
     /**
      * プラグインのリソースからコピーし、新しい Yaml ファイルを作成する。
      */
-    private void createFromResource() {
+    private void createFromResource() throws IOException {
         InputStream in = plugin.getResourceAsStream(filePath.getFileName().toString());
 
         if (in == null) {
-            plugin.getLogger().severe("プラグインに " + filePath.getFileName().toString() + " がありません。");
+            printSevere("Failed to copy file from resource: " + filePath.getFileName().toString());
             return;
         }
 
-        try {
-            Files.copy(in, filePath);
-            plugin.getLogger().info("ファイルを作成しました: " + filePath.getFileName().toString());
-        } catch (IOException e) {
-            plugin.getLogger().severe("ファイルの作成に失敗しました: " + filePath.toString());
-            e.printStackTrace();
-        }
+        Files.copy(in, filePath);
+        printInfo("Created the file: " + filePath.toString());
     }
 
     /**

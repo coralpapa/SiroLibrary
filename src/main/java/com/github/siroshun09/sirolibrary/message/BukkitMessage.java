@@ -116,6 +116,7 @@ public class BukkitMessage {
      * コンソールにプラグインが無効化されたことを流す。
      *
      * @param plugin 無効化されたプラグイン
+     * @since 1.5.4
      */
     public static void printDisabledMsg(@NotNull Plugin plugin) {
         plugin.getLogger().info(plugin.getName() + " v" + plugin.getDescription().getVersion() + " has been successfully disabled.");
