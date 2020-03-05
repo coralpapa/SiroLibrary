@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class BungeeYaml {
+public class BungeeYaml implements Yaml {
+
     protected final Plugin plugin;
     protected final Path filePath;
 
@@ -125,6 +126,7 @@ public class BungeeYaml {
 
     /**
      * メモリに乗っている設定値を Yaml ファイルに上書き保存する。
+     *
      * ファイルが存在しない場合、新しく作成される。
      *
      * @see BungeeYaml#create()

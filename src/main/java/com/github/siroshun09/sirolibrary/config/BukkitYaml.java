@@ -14,7 +14,8 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 
-public class BukkitYaml {
+public class BukkitYaml implements Yaml {
+
     protected final Plugin plugin;
     protected final Path filePath;
 
