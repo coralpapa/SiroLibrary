@@ -1,5 +1,9 @@
 # 変更履歴
 
+## 1.5.5
+
+- Yaml インターフェースを作成し、BukkitYaml, BungeeYaml にて実装する
+
 ## 1.5.4
 
 - BukkitMessage, BungeeMessage - プラグインの有効/無効ログ
