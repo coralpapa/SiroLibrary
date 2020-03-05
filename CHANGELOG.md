@@ -1,5 +1,10 @@
 # 変更履歴
 
+## 1.5.6
+
+- Yaml インターフェースの public 化
+- BungeeConfig#createFromResource() の Javadoc に @throw を追加する
+
 ## 1.5.5
 
 - Yaml インターフェースを作成し、BukkitYaml, BungeeYaml にて実装する

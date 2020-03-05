@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-interface Yaml {
+public interface Yaml {
 
     /**
      * Yaml ファイルをロードする。

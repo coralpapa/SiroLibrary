@@ -74,6 +74,8 @@ public class BungeeConfig extends BungeeYaml {
 
     /**
      * プラグインのリソースからコピーし、新しい Yaml ファイルを作成する。
+     *
+     * @throws IOException ファイルコピーで出入力例外が発生した時
      */
     private void createFromResource() throws IOException {
         InputStream in = plugin.getResourceAsStream(filePath.getFileName().toString());
